@@ -1,3 +1,11 @@
+function switchView(newView){
+	var oldView = window["oldView"];
+	$(oldView).fadeOut('fast', function(){
+        $(newView).fadeIn('fast');
+    });
+	window["oldView"] = newView;
+}
+
 function fetch_and_display_posts()
 {
     var xhr = new XMLHttpRequest();
@@ -48,7 +56,7 @@ function login()
         }
         else if(xhr.responseText == "TRUE" || xhr.responseText == "ALREADY_LOGGED_IN"){
             fetch_and_display_posts();
-            $("#posts_link").click();
+            switchView("#postsView");
         }
 		else{
 			navigator.notification.alert(xhr.responseText, null, "Error response:", "Try Again");
@@ -64,11 +72,11 @@ function logout()
     xhr.onload = function(){
         if(xhr.responseText == "LOGGED_OUT")
         {
-            $("#login_link").click();
+            switchView("#loginView");
         }
 		else if(xhr.responseText == "ALREADY_LOGGED_OUT")
         {
-            $("#login_link").click();
+            switchView("#loginView");
         }
     }   
     xhr.send();
@@ -86,6 +94,9 @@ function sendMessage(){
 
 function initialize()
 {
+	window["oldView"] = "#loadingView";
+	switchView("#loginView");
+	
 	var username = "nothing";
 	var password = "nothing";
 
@@ -95,10 +106,10 @@ function initialize()
 		if(xhr.responseText == "ALREADY_LOGGED_IN")
         {
             fetch_and_display_posts();
-            $("#posts_link").click();
+            switchView("#postsView");
         }
 		else{
-			$("#login_link").click();
+			switchView("#loginView");
 		}
     }   
     xhr.send();
