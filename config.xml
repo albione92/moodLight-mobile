@@ -15,7 +15,7 @@
     <author href="https://build.phonegap.com" email="support@phonegap.com">
       Hardeep Shoker
     </author>
+	
+	<plugin name="edu.uic.travelmidwest.cordova.udptransmit" source="pgb" spec="0.0.1" />
 
-    <!-- We'll include the Barcode plugin as an example -->
-    <plugin name="edu.uic.travelmidwest.cordova.udptransmit" spec="0.0.1" source="pgb" />
 </widget>
