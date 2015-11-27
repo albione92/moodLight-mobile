@@ -9,6 +9,15 @@ function onDeviceReady() {
 	}
 }
 
+function notify(dialog, title, button);){
+	try{
+		navigator.notification.alert(dialog, title, button);
+	}
+	catch(err){
+		alert(dialog);
+	}
+}
+
 function switchView(newView){
 	$("#loadingView").hide();
 	var oldView = window["oldView"];
@@ -24,13 +33,13 @@ function login(){
 
     if(username == "")
     {
-        navigator.notification.alert("Please enter username", null, "Username Missing", "OK");
+        notify("Please enter username", "Username Missing", "OK");
         return;
     }
 
     if(password == "")
     {
-        navigator.notification.alert("Please enter password", null, "Password Missing", "OK");  
+        notify("Please enter password","Password Missing", "OK");  
         return;
     }
 
@@ -38,13 +47,13 @@ function login(){
     xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password),true);
     xhr.onload = function(){
         if(xhr.responseText == "FALSE"){
-            navigator.notification.alert("Wrong Username and Password", null, "Wrong Creds", "Try Again");
+            notify("Wrong Username and Password", "Wrong Creds", "Try Again");
         }
         else if(xhr.responseText == "TRUE" || xhr.responseText == "ALREADY_LOGGED_IN"){
             switchView("#homeView");
         }
 		else{
-			navigator.notification.alert(xhr.responseText, null, "Error response:", "Try Again");
+			notify(xhr.responseText, "Error response:", "Try Again");
 		}
     }   
     xhr.send();
