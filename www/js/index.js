@@ -1,6 +1,6 @@
 function notify(dialog, title, button){
 	try{
-		navigator.notification.alert(dialog, title, button);
+		navigator.notification.alert(dialog, null, title, button);
 	}
 	catch(err){
 		alert(dialog);
