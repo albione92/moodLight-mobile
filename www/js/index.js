@@ -9,20 +9,6 @@ function onDeviceReady() {
 	}
 }
 
-function toggleSpin(spinning){
-	try{
-		if(spinning == true){
-			window.plugins.spinnerDialog.show();
-		}
-		else{
-			window.plugins.spinnerDialog.hide();
-		}
-	}
-	catch(err){
-		//nothing
-	}
-}
-
 function notify(dialog, title, button){
 	try{
 		navigator.notification.alert(dialog, title, button);
@@ -58,17 +44,14 @@ function login(){
     }
 
 	switchView("#loadingView","Loading");
-	toggleSpin(true);
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password),true);
     xhr.onload = function(){
         if(xhr.responseText == "FALSE"){
             notify("Wrong Username and Password", "Wrong Creds", "Try Again");
-			toggleSpin(false);
 			switchView("#loginView","Login");
         }
         else if(xhr.responseText == "TRUE" || xhr.responseText == "ALREADY_LOGGED_IN"){
-			toggleSpin(false);
             switchView("#homeView","Home");
         }
 		else{
