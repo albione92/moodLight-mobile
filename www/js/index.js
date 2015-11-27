@@ -86,7 +86,7 @@ function sendMessage(){
 }
 
 function startApp(){
-	alert("HELLO");
+	try{
 	window["oldView"] = "#loginView";
 	switchView("#loginView","Log In",false);
 		
@@ -101,6 +101,10 @@ function startApp(){
 		}
 	}   
 	xhr.send();
+	}
+	catch(err){
+		alert(err);
+	}
 }
 
 function open_browser(link){
