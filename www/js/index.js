@@ -9,7 +9,7 @@ function onDeviceReady() {
 	}
 }
 
-function notify(dialog, title, button);){
+function notify(dialog, title, button){
 	try{
 		navigator.notification.alert(dialog, title, button);
 	}
@@ -82,7 +82,7 @@ function sendMessage(){
 		udptransmit.sendMessage("%"+command+"\n");
 	}
 	catch(err) {
-		alert(err.message)
+		notify(err,"Error", "OK");  
 	}
 }
 
