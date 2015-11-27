@@ -1,4 +1,4 @@
-document.addEventListener("deviceready", startApp, false);
+$( window ).load(startApp);
 
 function notify(dialog, title, button){
 	try{
@@ -87,6 +87,7 @@ function sendMessage(){
 
 function startApp(){
 	try{
+	notify("Hello!", "Welcome", "Proceed");
 	window["oldView"] = "#loginView";
 	switchView("#loginView","Log In",false);
 		
