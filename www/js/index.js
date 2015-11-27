@@ -25,8 +25,8 @@ function fetch_and_display_posts()
 
 function login()
 {
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
+	var username = document.getElementById("username").value;
+	var password = document.getElementById("password").value;
 
     if(username == "")
     {
@@ -50,8 +50,50 @@ function login()
         else if(xhr.responseText == "TRUE")
         {
             fetch_and_display_posts();
-            $("#page_two_link").click();
+            $("#posts_link").click();
         }
+		else if(xhr.responseText == "ALREADY_LOGGED_IN")
+        {
+            fetch_and_display_posts();
+            $("#posts_link").click();
+        }
+    }   
+    xhr.send();
+}
+
+function logout()
+{
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=logout");
+    xhr.onload = function(){
+        if(xhr.responseText == "LOGGED_OUT")
+        {
+            $("#login_link").click();
+        }
+		else if(xhr.responseText == "ALREADY_LOGGED_OUT")
+        {
+            $("#login_link").click();
+        }
+    }   
+    xhr.send();
+}
+
+function initialize()
+{
+	var username = "nothing";
+	var password = "nothing";
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password));
+    xhr.onload = function(){
+		if(xhr.responseText == "ALREADY_LOGGED_IN")
+        {
+            fetch_and_display_posts();
+            $("#posts_link").click();
+        }
+		else{
+			$("#login_link").click();
+		}
     }   
     xhr.send();
 }
