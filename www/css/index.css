@@ -18,15 +18,25 @@
  */
 * {
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+	margin: 0;
 }
 
-body {
+html,body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#181818;
+    background-color:#242424;
     margin:0px;
 	color:#ccc;
+	height: 100%;
+}
+
+.wrapper {
+	min-height: 100%;
+	margin: 0 auto -2.0em; /* the bottom margin is the negative value of the footer's height */
+}
+footer, .push {
+	height: 2.0em; /* '.push' must be the same height as 'footer' */
 }
 
 /* Portrait layout (default) */
@@ -41,7 +51,52 @@ body {
     }
 }
 
-#loginView,#loadingView,#postsView{
+.head{
+	width:100%;
+	background-color:#181818;
+	height:2.5em;
+	padding-top: 1.25em;
+	padding-left: 1.5em;
+	margin-bottom:0.5em;
+}
+
+footer{
+	width:100%;
+	background-color:#181818;
+	padding-top: 0.5em;
+	padding-left: 1.5em;
+	margin-bottom:0.5em;
+}
+
+#username,#password{
+	height:4.0em;
+	margin-bottom:0.5em;
+	text-align:center;
+	background-color:#080808;
+	border:none;
+	color:#ccc;
+}
+
+button{
+	width:95%;
+	font-size:1.0em;
+	height:4.0em;
+	margin-bottom:0.5em;
+	text-align:center;
+	background-color:#181818;
+	border:none;
+	color:#ccc;
+	margin-left:2.5%;
+	margin-right:2.5%;
+}
+
+input{
+	width:95%;
+	margin-left:2.5%;
+	margin-right:2.5%;
+}
+
+#loginView,#loadingView,#homeView{
 	display:none;
 }
 
@@ -52,4 +107,8 @@ body {
 
 #headerLogo{
 	height:40px;
+}
+
+h1{
+	font-size:1.0em;
 }

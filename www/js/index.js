@@ -1,34 +1,10 @@
 function switchView(newView){
+	$("#loadingView").hide();
 	var oldView = window["oldView"];
 	$(oldView).fadeOut('fast', function(){
         $(newView).fadeIn('fast');
     });
 	window["oldView"] = newView;
-}
-
-function fetch_and_display_posts()
-{
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=posts");
-    xhr.onload = function(){
-        var posts_array = JSON.parse(xhr.responseText);
-
-        var html = "";
-
-        for(var count = 0; count < posts_array.length; count++)
-        {
-            var title = posts_array[count][0];
-            var link = posts_array[count][1];
-            var date = posts_array[count][2];
-            var image = posts_array[count][3];
-
-            html = html + "<li>" + "<a href='javascript:open_browser(\"" + link + "\")'>" + "<img height='128' width='128' src='" + image + "'>" + "<h2>" + title + "</h2>" + "<p>" + date + "</p></a></li>";
-        }
-
-        document.getElementById("posts").innerHTML = html;
-        $("#posts").listview("refresh");
-    }
-    xhr.send();
 }
 
 function login()
@@ -55,8 +31,7 @@ function login()
             navigator.notification.alert("Wrong Username and Password", null, "Wrong Creds", "Try Again");
         }
         else if(xhr.responseText == "TRUE" || xhr.responseText == "ALREADY_LOGGED_IN"){
-            fetch_and_display_posts();
-            switchView("#postsView");
+            switchView("#homeView");
         }
 		else{
 			navigator.notification.alert(xhr.responseText, null, "Error response:", "Try Again");
@@ -105,8 +80,7 @@ function initialize()
     xhr.onload = function(){
 		if(xhr.responseText == "ALREADY_LOGGED_IN")
         {
-            fetch_and_display_posts();
-            switchView("#postsView");
+            switchView("#homeView");
         }
 		else{
 			switchView("#loginView");
