@@ -43,20 +43,16 @@ function login()
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password));
     xhr.onload = function(){
-        if(xhr.responseText == "FALSE")
-        {
+        if(xhr.responseText == "FALSE"){
             navigator.notification.alert("Wrong Username and Password", null, "Wrong Creds", "Try Again");
         }
-        else if(xhr.responseText == "TRUE")
-        {
+        else if(xhr.responseText == "TRUE" || xhr.responseText == "ALREADY_LOGGED_IN"){
             fetch_and_display_posts();
             $("#posts_link").click();
         }
-		else if(xhr.responseText == "ALREADY_LOGGED_IN")
-        {
-            fetch_and_display_posts();
-            $("#posts_link").click();
-        }
+		else{
+			navigator.notification.alert(xhr.responseText, null, "Error response:", "Try Again");
+		}
     }   
     xhr.send();
 }
@@ -76,6 +72,18 @@ function logout()
         }
     }   
     xhr.send();
+}
+
+function sendMessage(){
+	alert("start");
+	try {
+		udptransmit.initialize("192.168.1.148", 2390);
+		udptransmit.sendMessage("Hello from my mobile app.");
+	}
+	catch(err) {
+		alert(err.message)
+	}
+	alert("end");
 }
 
 function initialize()

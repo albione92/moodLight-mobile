@@ -1,0 +1,10 @@
+{
+    "edu.uic.travelmidwest.cordova.udptransmit": {
+        "source": {
+            "type": "registry",
+            "id": "edu.uic.travelmidwest.cordova.udptransmit"
+        },
+        "is_top_level": true,
+        "variables": {}
+    }
+}
