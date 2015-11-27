@@ -1,57 +1,51 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
-        <title>Sitepoint - PhoneGap App using WordPress</title>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+		<title>Sitepoint - PhoneGap App using WordPress</title>
 		<link rel="stylesheet" href="css/index.css">
-    </head>
-    <body onload="initialize();">
-		<div class="wrapper">
-			<div data-role="page" id="loadingView">
-				<div data-role="main" class="ui-content">
-					LOADING...
-					<a href="#login" id="login_link"></a>
-				</div>
-			</div> 
-		
-			<div data-role="page" id="loginView">
-				<div data-role="header" data-position="fixed" class="head">
-					<h1>Login</h1>
-				</div>
-
-				<div data-role="main" class="ui-content">
-					<input id="username" type="text" placeholder="Enter Username">
-					<input id="password" type="password" placeholder="Enter Password">
-					<button onclick="login();">Login</button>
-					<a href="#postsView" id="posts_link"></a>
-				</div>
-
-				<footer>
-					<h1>2015 Connor Nishijima</h1>
-				</footer>
-			</div> 
-
-			<div data-role="page" id="homeView">
-				<div data-role="header" data-position="fixed" class="head">
-					<h1>Home</h1>
-				</div>
-
-				<div data-role="main" class="ui-content">
-					<input id="command" type="text" value="101008000255000005000"></input>
-					<button onclick="sendMessage();">SEND MESSAGE</button>
-					<button onclick="logout();">LOG OUT</button>
-					</ul>
-				</div>
-
-				<footer>
-					<h1>2015 Connor Nishijima</h1>
-				</footer>
-			</div> 
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	</head>
+	<body onload="initialize();">
+		<div data-role="page" id="loadingView">
+			<div data-role="main" class="ui-content">
+				LOADING...
+			</div>
 		</div> 
 
-        <script type="text/javascript" src="cordova.js"></script>
-		<script type="text/javascript" src="js/index.js"></script>
-        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>	
-    </body>
+		<div data-role="page" id="loginView">
+			<div data-role="header" data-position="fixed" class="head">
+				<h1>Login 2</h1>
+			</div>
+
+			<div data-role="main" class="ui-content">
+				<input id="username" type="text" placeholder="Username">
+				<input id="password" type="password" placeholder="Password">
+				<button onclick="login();">Login</button>
+			</div>
+
+			<footer>
+				<h1>2015 Connor Nishijima</h1>
+			</footer>
+		</div> 
+
+		<div data-role="page" id="homeView">
+			<div data-role="header" data-position="fixed" class="head">
+				<h1>Home</h1>
+			</div>
+
+			<div data-role="main" class="ui-content">
+				<input id="command" type="text" value="101008000255000005000"/>
+				<button onclick="sendMessage();">SEND MESSAGE</button>
+				<button onclick="logout();">LOG OUT</button>
+			</div>
+
+			<footer>
+				<h1>2015 Connor Nishijima</h1>
+			</footer>
+		</div>
+		<script type="text/javascript" src="js/index.js"/>
+		
+	</body>
 </html>

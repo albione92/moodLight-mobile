@@ -1,3 +1,14 @@
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+	try {
+		initialize();
+	}
+	catch(err) {
+		alert(err.message)
+	}
+}
+
 function switchView(newView){
 	$("#loadingView").hide();
 	var oldView = window["oldView"];
@@ -7,8 +18,7 @@ function switchView(newView){
 	window["oldView"] = newView;
 }
 
-function login()
-{
+function login(){
 	var username = document.getElementById("username").value;
 	var password = document.getElementById("password").value;
 
@@ -25,7 +35,7 @@ function login()
     }
 
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password));
+    xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password),true);
     xhr.onload = function(){
         if(xhr.responseText == "FALSE"){
             navigator.notification.alert("Wrong Username and Password", null, "Wrong Creds", "Try Again");
@@ -40,10 +50,9 @@ function login()
     xhr.send();
 }
 
-function logout()
-{
+function logout(){
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=logout");
+    xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=logout",true);
     xhr.onload = function(){
         if(xhr.responseText == "LOGGED_OUT")
         {
@@ -68,29 +77,27 @@ function sendMessage(){
 	}
 }
 
-function initialize()
-{
+function initialize(){
 	window["oldView"] = "#loadingView";
 	switchView("#loginView");
-	
+		
 	var username = "nothing";
 	var password = "nothing";
-
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password));
-    xhr.onload = function(){
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password),true);
+	xhr.onload = function(){
 		if(xhr.responseText == "ALREADY_LOGGED_IN")
-        {
-            switchView("#homeView");
-        }
+		{
+			switchView("#homeView");
+		}
 		else{
 			switchView("#loginView");
 		}
-    }   
-    xhr.send();
+	}   
+	xhr.send();
 }
 
-function open_browser(link)
-{
+function open_browser(link){
     window.open(link, '_blank', 'location=yes');
 }
