@@ -84,13 +84,12 @@ function sendMessage(){
 		udptransmit.sendMessage("%"+command+"\n");
 	}
 	catch(err) {
-		notify(err,"Error", "OK");  
+		notify(err.message,"Error", "OK");  
 	}
 }
 
 function startApp(){
 	try{
-	notify("Hello!", "Welcome", "Proceed");
 	window["oldView"] = "#loginView";
 	switchView("#loginView","Log In",false);
 		

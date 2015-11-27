@@ -44,7 +44,11 @@
 				<button onclick="logout();">LOG OUT</button>
 			</div>
 		</div>
-		<script type="text/javascript" src="js/index.js"/>
-		<script type="text/javascript" src="cordova.js"/>
+		
+		<script>alert("before");</script>
+		<script type="text/javascript" src="cordova.js"></script>
+		<script>alert("middle");</script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<script>alert("end");</script>
 	</body>
 </html>
