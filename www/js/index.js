@@ -75,15 +75,13 @@ function logout()
 }
 
 function sendMessage(){
-	alert("start");
 	try {
-		udptransmit.initialize("192.168.1.148", 2390);
-		udptransmit.sendMessage("Hello from my mobile app.");
+		udptransmit.initialize("192.168.1.193", 2390);
+		udptransmit.sendMessage("%101008000255000005000\n");
 	}
 	catch(err) {
 		alert(err.message)
 	}
-	alert("end");
 }
 
 function initialize()
