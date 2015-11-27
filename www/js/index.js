@@ -59,8 +59,9 @@ function logout()
 
 function sendMessage(){
 	try {
+		var command = String(document.getElementById("command").value);
 		udptransmit.initialize("192.168.1.193", 2390);
-		udptransmit.sendMessage("%101008000255000005000\n");
+		udptransmit.sendMessage("%"+command+"\n");
 	}
 	catch(err) {
 		alert(err.message)

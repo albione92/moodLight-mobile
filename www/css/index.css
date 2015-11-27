@@ -68,7 +68,7 @@ footer{
 	margin-bottom:0.5em;
 }
 
-#username,#password{
+#username,#password,#command{
 	height:4.0em;
 	margin-bottom:0.5em;
 	text-align:center;
