@@ -1,0 +1,11 @@
+{
+    "edu.uic.travelmidwest.cordova.udptransmit": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/applejacko/cordova-plugin-uic-udp.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    }
+}
