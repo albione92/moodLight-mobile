@@ -7,7 +7,7 @@
 		<link rel="stylesheet" href="css/index.css">
 		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 	</head>
-	<body>
+	<body onload="startApp();">
 		<header id="topBar">
 			<div id="menuIcon">
 				<img src="img/menu.png" style="width:1.5em;">
@@ -44,8 +44,11 @@
 				<button onclick="logout();">LOG OUT</button>
 			</div>
 		</div>
-		<script type="text/javascript" src="cordova.js"/>
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-		<script type="text/javascript" src="js/index.js"/>
+		
+		<script>alert("before");</script>
+		<script type="text/javascript" src="cordova.js"></script>
+		<script>alert("middle");</script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<script>alert("end");</script>
 	</body>
 </html>

@@ -1,0 +1,166 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+	margin: 0;
+}
+
+html,body {
+background-color:#242424;
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    margin:0px;
+	color:#ccc;
+	height: 100%;
+	font-family: 'Roboto', sans-serif;
+}
+
+.wrapper {
+	min-height: 100%;
+	margin: 0 auto -2.0em; /* the bottom margin is the negative value of the footer's height */
+}
+footer, .push {
+	height: 2.0em; /* '.push' must be the same height as 'footer' */
+}
+
+/* Portrait layout (default) */
+.app {
+
+}
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+    .app {
+	
+    }
+}
+
+header{
+	width:100%;
+	background-color:#181818;
+	height: 3.5em;
+	margin-bottom:0.5em;
+    font-weight: bold;
+}
+
+#logo{
+	width:8em;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 5em;
+}
+
+#loginWindow{
+width: 90%;
+    height: 13.9em;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 10em;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding-top: 0.5em;
+	    border-radius: 5px;
+}
+
+#loadingWindow{
+    width: 90%;
+    height: 2em;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding-top: 0.5em;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#menuIcon{
+	display:inline-block;
+	margin-left: 1em;
+    margin-top: 1em;
+}
+
+#title{
+	display:inline-block;
+	position: relative;
+    top: -0.4em;
+    left: 0.3em;
+}
+
+footer{
+	width:100%;
+	background-color:#181818;
+	padding-top: 0.5em;
+	padding-left: 1.5em;
+	margin-bottom:0.5em;
+}
+
+#username,#password,#command{
+	height:4.0em;
+	margin-bottom:0.5em;
+	text-align:center;
+	background-color:#303030;
+	border:none;
+	color:#ccc;
+}
+
+button{
+	width:95%;
+	font-size:1.0em;
+	height:4.0em;
+	margin-bottom:0.5em;
+	text-align:center;
+	background-color:#181818;
+	border:none;
+	color:#ccc;
+	margin-left:2.5%;
+	margin-right:2.5%;
+	font-family: 'Roboto', sans-serif;
+}
+
+input{
+	width:95%;
+	margin-left:2.5%;
+	margin-right:2.5%;
+	font-family: 'Roboto', sans-serif;
+	font-size: 1em;
+}
+
+#loginView,#loadingView,#homeView{
+	display:none;
+}
+
+#header{
+	background-color:#242424;
+	padding:10px;
+}
+
+#headerLogo{
+	height:40px;
+}
+
+h1{
+	font-size:1.0em;
+}
