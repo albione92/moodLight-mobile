@@ -2,7 +2,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
 	try {
-		initialize();
+		//initialize();
 	}
 	catch(err) {
 		alert(err.message)
@@ -18,9 +18,18 @@ function notify(dialog, title, button){
 	}
 }
 
-function switchView(newView,newTitle){
+function switchView(newView,newTitle,showHead){
+	if (showHead === undefined) {
+		showHead = true;
+	}
 	var oldView = window["oldView"];
 	$(oldView).fadeOut('fast', function(){
+		if(showHead == false){
+			$("#topBar").hide();
+		}
+		else{
+			$("#topBar").show();
+		}
         $("#title").html(newTitle);
 		$(newView).fadeIn('fast');
     });
@@ -43,13 +52,13 @@ function login(){
         return;
     }
 
-	switchView("#loadingView","Loading");
+	switchView("#loadingView","Loading",false);
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password),true);
     xhr.onload = function(){
         if(xhr.responseText == "FALSE"){
             notify("Wrong Username and Password", "Wrong Creds", "Try Again");
-			switchView("#loginView","Login");
+			switchView("#loginView","Log In",false);
         }
         else if(xhr.responseText == "TRUE" || xhr.responseText == "ALREADY_LOGGED_IN"){
             switchView("#homeView","Home");
@@ -67,11 +76,11 @@ function logout(){
     xhr.onload = function(){
         if(xhr.responseText == "LOGGED_OUT")
         {
-            switchView("#loginView","Login");
+            switchView("#loginView","Log In",false);
         }
 		else if(xhr.responseText == "ALREADY_LOGGED_OUT")
         {
-            switchView("#loginView","Login");
+            switchView("#loginView","Log In",false);
         }
     }   
     xhr.send();
@@ -90,7 +99,7 @@ function sendMessage(){
 
 function initialize(){
 	window["oldView"] = "#loadingView";
-	switchView("#loginView");
+	switchView("#loginView","Log In",false);
 		
 	var username = "nothing";
 	var password = "nothing";
@@ -103,7 +112,7 @@ function initialize(){
 			switchView("#homeView","Home");
 		}
 		else{
-			switchView("#loginView","Login");
+			switchView("#loginView","Log In",false);
 		}
 	}   
 	xhr.send();
