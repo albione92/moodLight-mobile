@@ -18,11 +18,11 @@ function notify(dialog, title, button){
 	}
 }
 
-function switchView(newView){
-	$("#loadingView").hide();
+function switchView(newView,newTitle){
 	var oldView = window["oldView"];
 	$(oldView).fadeOut('fast', function(){
-        $(newView).fadeIn('fast');
+        $("#title").html(newTitle);
+		$(newView).fadeIn('fast');
     });
 	window["oldView"] = newView;
 }
@@ -39,18 +39,23 @@ function login(){
 
     if(password == "")
     {
-        notify("Please enter password","Password Missing", "OK");  
+        notify("Please enter password","Password Missing", "OK"); 
         return;
     }
 
+	switchView("#loadingView","Loading");
+	window.plugins.spinnerDialog.show();
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password),true);
     xhr.onload = function(){
         if(xhr.responseText == "FALSE"){
             notify("Wrong Username and Password", "Wrong Creds", "Try Again");
+			window.plugins.spinnerDialog.hide();
+			switchView("#loginView","Login");
         }
         else if(xhr.responseText == "TRUE" || xhr.responseText == "ALREADY_LOGGED_IN"){
-            switchView("#homeView");
+			window.plugins.spinnerDialog.hide();
+            switchView("#homeView","Home");
         }
 		else{
 			notify(xhr.responseText, "Error response:", "Try Again");
@@ -65,11 +70,11 @@ function logout(){
     xhr.onload = function(){
         if(xhr.responseText == "LOGGED_OUT")
         {
-            switchView("#loginView");
+            switchView("#loginView","Login");
         }
 		else if(xhr.responseText == "ALREADY_LOGGED_OUT")
         {
-            switchView("#loginView");
+            switchView("#loginView","Login");
         }
     }   
     xhr.send();
@@ -98,10 +103,10 @@ function initialize(){
 	xhr.onload = function(){
 		if(xhr.responseText == "ALREADY_LOGGED_IN")
 		{
-			switchView("#homeView");
+			switchView("#homeView","Home");
 		}
 		else{
-			switchView("#loginView");
+			switchView("#loginView","Login");
 		}
 	}   
 	xhr.send();

@@ -6,8 +6,17 @@
 		<title>Sitepoint - PhoneGap App using WordPress</title>
 		<link rel="stylesheet" href="css/index.css">
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 	</head>
 	<body onload="initialize();">
+		<header>
+			<div id="menuIcon">
+				<img src="img/menu.png" style="width:1.5em;">
+			</div>
+			<div id="title">
+				Welcome to moodLighting
+			</div>
+		</header>
 		<div data-role="page" id="loadingView">
 			<div data-role="main" class="ui-content">
 				LOADING...
@@ -15,10 +24,6 @@
 		</div> 
 
 		<div data-role="page" id="loginView">
-			<div data-role="header" data-position="fixed" class="head">
-				<h1>Login</h1>
-			</div>
-
 			<div data-role="main" class="ui-content">
 				<input id="username" type="text" placeholder="Username">
 				<input id="password" type="password" placeholder="Password">
@@ -31,10 +36,6 @@
 		</div> 
 
 		<div data-role="page" id="homeView">
-			<div data-role="header" data-position="fixed" class="head">
-				<h1>Home 2</h1>
-			</div>
-
 			<div data-role="main" class="ui-content">
 				<input id="command" type="text" value="101008000255000005000"/>
 				<button onclick="sendMessage();">SEND MESSAGE</button>
