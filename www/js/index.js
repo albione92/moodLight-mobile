@@ -8,9 +8,6 @@ function notify(dialog, title, button){
 }
 
 function switchView(newView,newTitle,showHead){
-	if (showHead === undefined) {
-		showHead = true;
-	}
 	var oldView = window["oldView"];
 	$(oldView).fadeOut('fast', function(){
 		if(showHead == false){
@@ -86,8 +83,8 @@ function sendMessage(){
 	}
 }
 
-function initialize(){
-	window["oldView"] = "#loadingView";
+function startApp(){
+	window["oldView"] = "#loginView";
 	switchView("#loginView","Log In",false);
 		
 	var username = "nothing";
@@ -96,12 +93,8 @@ function initialize(){
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password),true);
 	xhr.onload = function(){
-		if(xhr.responseText == "ALREADY_LOGGED_IN")
-		{
+		if(xhr.responseText == "ALREADY_LOGGED_IN"){
 			switchView("#homeView","Home");
-		}
-		else{
-			switchView("#loginView","Log In",false);
 		}
 	}   
 	xhr.send();
