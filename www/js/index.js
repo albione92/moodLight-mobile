@@ -1,14 +1,3 @@
-document.addEventListener("deviceready", onDeviceReady, false);
-
-function onDeviceReady() {
-	try {
-		//initialize();
-	}
-	catch(err) {
-		alert(err.message)
-	}
-}
-
 function notify(dialog, title, button){
 	try{
 		navigator.notification.alert(dialog, title, button);
