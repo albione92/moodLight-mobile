@@ -1,0 +1,17 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-whitelist": {},
+        "edu.uic.travelmidwest.cordova.udptransmit": {},
+        "cordova-plugin-keyboard": {},
+        "cordova-plugin-device": {},
+        "cordova-plugin-splashscreen": {}
+    },
+    "dependent_plugins": {}
+}

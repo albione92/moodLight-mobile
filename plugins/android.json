@@ -7,12 +7,8 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "me.app.id"
-        },
-        "edu.uic.travelmidwest.cordova.udptransmit": {
-            "PACKAGE_NAME": "me.app.id"
-        }
+        "cordova-plugin-device": {},
+        "cordova-plugin-splashscreen": {}
     },
     "dependent_plugins": {}
 }
