@@ -165,14 +165,14 @@ function getDevices(){
 			$("#deviceList").html(outHTML);
 		}
 		else{
+			data = JSON.parse(xhr.responseText);
+			window["username"] = data["username"];
+			window["email"] = data["email"];
+			$("#accountName").html(window["email"]);
+			
 			if(xhr.responseText != window["devicesList"]){
 				window["devicesList"] = xhr.responseText;
 				outHTML = "";
-				data = JSON.parse(xhr.responseText);
-				window["username"] = data["username"];
-				window["email"] = data["email"];
-				
-				$("#accountName").html(window["email"]);
 				
 				data["devices"].forEach(function(entry) {
 					nickname = entry["nickname"].replace("_", " ");
@@ -281,7 +281,6 @@ function startApp(){
 			loginSuccess();
 		}
 		else{
-			window["oldView"] = "#loginView";
 			switchView("#loginView","Log In",false,false);
 		}
 	};   
