@@ -94,6 +94,7 @@ function loginSuccess(){
 	getDevices();
 	setInterval(getDevices,5000);
 	$("#splash").fadeOut("fast");
+	getData();
 }
 
 function getDevices(){
