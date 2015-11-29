@@ -15,9 +15,22 @@ function onDeviceReady(){
 }
 
 $(function() {
-	slideLeft.open();
-    //FastClick.attach(document.body);
+    FastClick.attach(document.body);
+	
 });
+
+function toggleMenu(state){
+	if(state == true){
+		$("body").css("overflow", "hidden");
+		$('#container').removeClass('slideOut').addClass('slideIn');
+		$('#mask').show();
+	}
+	else if(state == false){
+		$("body").css("overflow", "visible");
+		$('#container').removeClass('slideIn').addClass('slideOut');
+		$('#mask').hide();
+	}
+}
 
 function notify(dialog, title, button){
 	try{

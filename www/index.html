@@ -9,15 +9,22 @@
 		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 		
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-		<!-- <script src='js/fastclick.js'></script> -->
+		<script src='js/fastclick.js'></script>
 	</head>
 	
 	<body>
-
-	<div id="o-wrapper" class="o-wrapper">	
-
+	
+		<div id="menu">
+			<div id="menuInner">
+				BACK OF APP
+			</div>
+		</div>
+	
+		<div id="container" class="slideOut">
+		<div id="mask" onclick="toggleMenu(false)"></div>
+	
 		<header id="topBar">
-			<div id="menuIcon" class="c-button" ontouchend="slideLeft.open();">
+			<div id="menuIcon" class="c-button" onclick="toggleMenu(true)">
 				<img src="img/menu.png" style="width:1.5em;">
 			</div>
 			<div id="title">
@@ -47,43 +54,8 @@
 			<button onclick="logout();">LOG OUT</button>
 		</div>
 		
-	</div><!-- /o-wrapper -->
-	
-<nav id="c-menu--slide-left" class="c-menu c-menu--slide-left">
-  <button class="c-menu__close">&larr; Close Menu</button>
-  <ul class="c-menu__items">
-    <li class="c-menu__item"><a href="#" class="c-menu__link">Home</a></li>
-    <li class="c-menu__item"><a href="#" class="c-menu__link">About</a></li>
-    <li class="c-menu__item"><a href="#" class="c-menu__link">Services</a></li>
-    <li class="c-menu__item"><a href="#" class="c-menu__link">Work</a></li>
-    <li class="c-menu__item"><a href="#" class="c-menu__link">Contact</a></li>
-  </ul>
-</nav><!-- /c-menu slide-left -->
+		</div>
 
-<div id="c-mask" class="c-mask"></div><!-- /c-mask -->
-
-<script src="js/menu.js"></script>
-<script>
-  
-  /**
-   * Slide left instantiation and action.
-   */
-  var slideLeft = new Menu({
-    wrapper: '#o-wrapper',
-    type: 'slide-left',
-    menuOpenerClass: '.c-button',
-    maskId: '#c-mask'
-  });
-
-  var slideLeftBtn = document.querySelector('#menuIcon');
-  
-  slideLeftBtn.addEventListener('click', function(e) {
-    e.preventDefault;
-    slideLeft.open();
-  });
-</script>
-
-		
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
 	</body>
