@@ -61,7 +61,16 @@ background-color:#181818;
 }
 
 #menuInner{
+	padding:0em;
+}
+
+.menu-li{
+	border-bottom:1px solid #242424;
 	padding:1em;
+}
+
+.menu-li:active{
+	background-color:#484848;
 }
 
 /* Portrait layout (default) */
@@ -172,7 +181,7 @@ input{
 	font-size: 1em;
 }
 
-#loginView,#loadingView,#homeView{
+.page{
 	display:none;
 }
 

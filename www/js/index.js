@@ -52,6 +52,7 @@ function switchView(newView,newTitle,showHead){
 		}
         $("#title").html(newTitle);
 		$(newView).fadeIn('fast');
+		toggleMenu(false);
     });
 	window["oldView"] = newView;
 }
