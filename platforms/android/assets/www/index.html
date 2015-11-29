@@ -3,48 +3,78 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
-		<title>moodLighting</title>
+		<title>moodLighting 2</title>
+		
 		<link rel="stylesheet" href="css/index.css">
 		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+		
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src='js/fastclick.js'></script>
 	</head>
+	
 	<body>
+	
+<nav id="menu">
+  <header>
+    <h2>Menu</h2>
+  </header>
+</nav>
+
+<main id="panel">
+  <header>
+  <button class="toggle-button">☰</button>
+    <h2>Panel 2</h2>
+  </header>
+</main>
+	
 		<header id="topBar">
 			<div id="menuIcon">
 				<img src="img/menu.png" style="width:1.5em;">
 			</div>
 			<div id="title">
-				DEFAULT
 			</div>
 		</header>
-		<div data-role="page" id="loadingView">
-			<div data-role="main" class="ui-content">
-				<div id="loadingWindow">
-					Loading...
-				</div>
+		
+		<div id="loadingView">
+			<div id="loadingWindow">
+				Loading...
 			</div>
 		</div> 
 
-		<div data-role="page" id="loginView">
-			<div data-role="main" class="ui-content">
-				<div id="logo">
-					<img src="img/logo.png" style="width:8em;"/>
-				</div>
-				<div id="loginWindow">
-					<input id="username" type="text" placeholder="Username">
-					<input id="password" type="password" placeholder="Password">
-					<button onclick="login();">Login</button>
-				</div>
+		<div id="loginView">
+			<div id="logo">
+				<img src="img/logo.png" style="width:8em;"/>
+			</div>
+			<div id="loginWindow">
+				<input id="username" type="text" placeholder="Username">
+				<input id="password" type="password" placeholder="Password">
+				<button onclick="login();">Login</button>
 			</div>
 		</div> 
 
-		<div data-role="page" id="homeView">
-			<div data-role="main" class="ui-content">
-				<input id="command" type="text" value="101008000255000005000"/>
-				<button onclick="sendMessage();">SEND MESSAGE</button>
-				<button onclick="logout();">LOG OUT</button>
-			</div>
+		<div id="homeView">
+			<input id="command" type="text" value="101008000255000005000"/>
+			<button onclick="sendMessage();">SEND MESSAGE</button>
+			<button onclick="logout();">LOG OUT</button>
 		</div>
+		
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
+		
+		<script src="js/slideout.min.js"></script>
+<script>
+  var slideout = new Slideout({
+        'panel': document.getElementById('panel'),
+        'menu': document.getElementById('menu'),
+        'padding': 256,
+        'tolerance': 70
+      });
+
+      // Toggle button
+      document.querySelector('.toggle-button').addEventListener('click', function() {
+        slideout.toggle();
+      });
+</script>
+        
 	</body>
 </html>

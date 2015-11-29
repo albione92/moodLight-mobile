@@ -13,13 +13,22 @@ module.exports = [
         "merges": [
             "udptransmit"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-keyboard/www/keyboard.js",
+        "id": "cordova-plugin-keyboard.keyboard",
+        "pluginId": "cordova-plugin-keyboard",
+        "clobbers": [
+            "window.Keyboard"
+        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
     "cordova-plugin-whitelist": "1.2.0",
-    "edu.uic.travelmidwest.cordova.udptransmit": "1.0.8"
+    "edu.uic.travelmidwest.cordova.udptransmit": "1.0.8",
+    "cordova-plugin-keyboard": "1.1.3"
 }
 // BOTTOM OF METADATA
 });

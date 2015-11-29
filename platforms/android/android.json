@@ -18,6 +18,16 @@
                         }
                     ]
                 }
+            },
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Keyboard\"><param name=\"android-package\" onload=\"true\" value=\"org.apache.cordova.labs.keyboard.Keyboard\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
             }
         }
     },
@@ -27,6 +37,9 @@
         },
         "edu.uic.travelmidwest.cordova.udptransmit": {
             "PACKAGE_NAME": "me.app.id"
+        },
+        "cordova-plugin-keyboard": {
+            "PACKAGE_NAME": "com.phonegap.helloworld"
         }
     },
     "dependent_plugins": {},
@@ -44,10 +57,19 @@
             "merges": [
                 "udptransmit"
             ]
+        },
+        {
+            "file": "plugins/cordova-plugin-keyboard/www/keyboard.js",
+            "id": "cordova-plugin-keyboard.keyboard",
+            "pluginId": "cordova-plugin-keyboard",
+            "clobbers": [
+                "window.Keyboard"
+            ]
         }
     ],
     "plugin_metadata": {
         "cordova-plugin-whitelist": "1.2.0",
-        "edu.uic.travelmidwest.cordova.udptransmit": "1.0.8"
+        "edu.uic.travelmidwest.cordova.udptransmit": "1.0.8",
+        "cordova-plugin-keyboard": "1.1.3"
     }
 }
