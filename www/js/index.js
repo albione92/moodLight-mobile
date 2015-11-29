@@ -3,6 +3,7 @@ startApp();
 document.addEventListener("deviceready", onDeviceReady, false);
 window["devicesList"] = "NONE";
 window["menuState"] = false;
+window["gotData"] = false;
 
 function onDeviceReady(){
     document.addEventListener("backbutton", function(e){
@@ -18,6 +19,11 @@ function onDeviceReady(){
 
 $(function() {
 	FastClick.attach(document.body);
+	setInterval(function(){
+		if(window["loggedIn"] == true){
+			getData();
+		}
+	},60000);
 });
 
 function toggleMenu(state){
@@ -58,11 +64,15 @@ function switchView(newView,newTitle,showHead,hideMenu){
 			$("#topBarPush").show();
 		}
         $("#title").html(newTitle);
-		$(newView).fadeIn('fast');
-		window["viewActive"] = newView;
-		if(hideMenu == true){
-			toggleMenu(false);
-		}
+		$(newView).fadeIn('fast',function(){
+			window["viewActive"] = newView;
+			if(hideMenu == true){
+				toggleMenu(false);
+			}
+			if(newView == "#homeView" && window["gotData"] == false){
+				getData();
+			}
+		});
     });
 	window["oldView"] = newView;
 }
@@ -94,7 +104,7 @@ function loginSuccess(){
 	getDevices();
 	setInterval(getDevices,5000);
 	$("#splash").fadeOut("fast");
-	getData();
+	
 }
 
 function getDevices(){
