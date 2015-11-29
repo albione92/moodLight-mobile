@@ -268,6 +268,7 @@ function sendMessage(){
 }
 
 function startApp(){
+	alert("startApp");
 	try{
 		
 	var email = "nothing";
@@ -281,6 +282,7 @@ function startApp(){
 			loginSuccess();
 		}
 		else{
+			window["oldView"] = "#loginView";
 			switchView("#loginView","Log In",false,false);
 		}
 	};   
