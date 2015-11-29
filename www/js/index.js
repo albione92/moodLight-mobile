@@ -2,6 +2,7 @@ startApp();
 
 document.addEventListener("deviceready", onDeviceReady, false);
 window["devicesList"] = "NONE";
+window["menuState"] = false;
 
 function onDeviceReady(){
     document.addEventListener("backbutton", function(e){
@@ -20,15 +21,21 @@ $(function() {
 });
 
 function toggleMenu(state){
-	if(state == true){
-		$("body").css("overflow", "hidden");
-		$('#container').removeClass('slideOut').addClass('slideIn');
-		$('#mask').show();
+	if(window["menuState"] == false){
+		if(state == true){
+			window["menuState"] = state;
+			$("body").css("overflow", "hidden");
+			$('#container').removeClass('slideOut').addClass('slideIn');
+			$('#mask').show();
+		}
 	}
-	else if(state == false){
-		$("body").css("overflow", "visible");
-		$('#container').removeClass('slideIn').addClass('slideOut');
-		$('#mask').hide();
+	else if(window["menuState"] == true){
+		if(state == false){
+			window["menuState"] = state;
+			$("body").css("overflow", "visible");
+			$('#container').removeClass('slideIn').addClass('slideOut');
+			$('#mask').hide();
+		}
 	}
 }
 
@@ -41,7 +48,8 @@ function notify(dialog, title, button){
 	}
 }
 
-function switchView(newView,newTitle,showHead){
+function switchView(newView,newTitle,showHead,hideMenu){
+	hideMenu = hideMenu || true;
 	var oldView = window["oldView"];
 	$(oldView).fadeOut('fast', function(){
 		if(showHead == false){
@@ -52,7 +60,9 @@ function switchView(newView,newTitle,showHead){
 		}
         $("#title").html(newTitle);
 		$(newView).fadeIn('fast');
-		toggleMenu(false);
+		if(hideMenu == true){
+			toggleMenu(false);
+		}
     });
 	window["oldView"] = newView;
 }
@@ -113,14 +123,14 @@ function getDevices(){
 				$("#accountName").html(window["email"]);
 				
 				data["devices"].forEach(function(entry) {
-					nickname = entry["nickname"];
+					nickname = entry["nickname"].replace("_", " ");
 					mode = entry["mode"];
 					ip = entry["ip"];
 					outHTML += 
 						"<div class='deviceli'>"+
 							"<div class='inner'>"+
 								"<span class='nick'>"+
-									nickname+
+									nickname.replace("_", " ")+
 								"</span>"+
 								"<span class='ip'>"+
 									ip+
@@ -143,27 +153,27 @@ function getDevices(){
 }
 
 function login(){
-	var username = document.getElementById("username").value;
+	var email = document.getElementById("email").value;
 	var password = document.getElementById("password").value;
 
-    if(username == "")
+    if(email == "")
     {
-        notify("Please enter username", "Username Missing", "OK");
+        notify("Please enter your email", "Email Missing", "OK");
         return;
     }
 
     if(password == "")
     {
-        notify("Please enter password","Password Missing", "OK"); 
+        notify("Please enter a password","Password Missing", "OK"); 
         return;
     }
 
 	switchView("#loadingView","Loading",false);
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password),true);
+    xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password),true);
     xhr.onload = function(){
         if(xhr.responseText == "FALSE"){
-            notify("Wrong Username and Password", "Wrong Creds", "Try Again");
+            notify("Wrong Email or Password", "Wrong Creds", "Try Again");
 			switchView("#loginView","Log In",false);
         }
         else if(xhr.responseText == "TRUE" || xhr.responseText == "ALREADY_LOGGED_IN"){
@@ -208,11 +218,11 @@ function sendMessage(){
 function startApp(){
 	try{
 		
-	var username = "nothing";
+	var email = "nothing";
 	var password = "nothing";
 	
 	var xhr = new XMLHttpRequest();
-	xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password),true);
+	xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password),true);
 	xhr.onload = function(){
 		if(xhr.responseText == "ALREADY_LOGGED_IN"){
 			window["oldView"] = "#loginView";

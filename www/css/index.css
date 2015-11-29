@@ -236,6 +236,7 @@ header{
 }
 
 .messages,.alerts{
+	z-index:99;
 	display:none;
 	-webkit-box-shadow: 0em 0em 1em 0em rgba(0,0,0,0.75);
 	-moz-box-shadow: 0em 0em 1em 0em rgba(0,0,0,0.75);
@@ -264,7 +265,7 @@ footer{
 	margin-bottom:0.5em;
 }
 
-#username,#password,#command{
+#email,#password,#command{
 	height:4.0em;
 	margin-bottom:0.5em;
 	text-align:center;
