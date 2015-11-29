@@ -177,9 +177,17 @@ div.google-visualization-tooltip { color:#000;padding:10px;margin-top:-10px;}
 	margin-top: 5em;
 }
 
+#login{
+	background-color:#297762;
+}
+
+#signup{
+	background-color:#336633;
+}
+
 #loginWindow{
 	width: 90%;
-    height: 13.9em;
+    height: 18.4em;
     background-color: rgba(0, 0, 0, 0.7);
     position: absolute;
     top: 10em;
