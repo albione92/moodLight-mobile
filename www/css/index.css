@@ -121,6 +121,7 @@ header{
 	margin-bottom:0.5em;
     font-weight: bold;
 	font-size:1.2em;
+	display:none;
 }
 
 #logo{
@@ -210,9 +211,8 @@ header{
 }
 
 .deviceli{
-	width:95%;
-	margin-left:2.5%;
-	margin-right:2.5%;
+	margin-left:0.5em;
+	margin-right:0.5em;
 	background-color:#181818;
 	margin-bottom:0.25em;
 	padding-top:0.25em;
@@ -283,15 +283,15 @@ button{
 	background-color:#181818;
 	border:none;
 	color:#ccc;
-	margin-left:2.5%;
-	margin-right:2.5%;
+	margin-left:0.5em;
+	margin-right:0.5em;
 	font-family: 'Roboto', sans-serif;
 }
 
 input{
 	width:95%;
-	margin-left:2.5%;
-	margin-right:2.5%;
+	margin-left:0.5em;
+	margin-right:0.5em;
 	font-family: 'Roboto', sans-serif;
 	font-size: 1em;
 }

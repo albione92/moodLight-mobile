@@ -21,6 +21,7 @@ $(function() {
 });
 
 function toggleMenu(state){
+	alert("toggle");
 	if(window["menuState"] == false){
 		if(state == true){
 			window["menuState"] = state;
@@ -49,7 +50,6 @@ function notify(dialog, title, button){
 }
 
 function switchView(newView,newTitle,showHead,hideMenu){
-	hideMenu = hideMenu || true;
 	var oldView = window["oldView"];
 	$(oldView).fadeOut('fast', function(){
 		if(showHead == false){
@@ -90,7 +90,7 @@ function showAlert(content,color){
 
 function loginSuccess(){
 	window["loggedIn"] = true;
-	switchView("#homeView","Home");
+	switchView("#homeView","Home",true,false);
 	getDevices();
 	setInterval(getDevices,5000);
 	$("#splash").fadeOut("fast");
@@ -234,6 +234,7 @@ function startApp(){
 		}
 	};   
 	xhr.send();
+	$("#splash").fadeOut("fast");
 	}
 	catch(err){
 		alert(err);
