@@ -6,7 +6,7 @@ window["menuState"] = false;
 
 function onDeviceReady(){
     document.addEventListener("backbutton", function(e){
-       if($.mobile.activePage.is('#homepage')){
+       if(window["viewActive"] == "#homeView"){
            e.preventDefault();
            navigator.app.exitApp();
        }
@@ -17,27 +17,24 @@ function onDeviceReady(){
 }
 
 $(function() {
-    FastClick.attach(document.body);
+	FastClick.attach(document.body);
 });
 
 function toggleMenu(state){
-	alert("toggle");
-	if(window["menuState"] == false){
 		if(state == true){
 			window["menuState"] = state;
 			$("body").css("overflow", "hidden");
 			$('#container').removeClass('slideOut').addClass('slideIn');
+			$('#topBar').removeClass('slideOut').addClass('slideIn');
 			$('#mask').show();
 		}
-	}
-	else if(window["menuState"] == true){
 		if(state == false){
 			window["menuState"] = state;
 			$("body").css("overflow", "visible");
 			$('#container').removeClass('slideIn').addClass('slideOut');
+			$('#topBar').removeClass('slideIn').addClass('slideOut');
 			$('#mask').hide();
 		}
-	}
 }
 
 function notify(dialog, title, button){
@@ -54,12 +51,15 @@ function switchView(newView,newTitle,showHead,hideMenu){
 	$(oldView).fadeOut('fast', function(){
 		if(showHead == false){
 			$("#topBar").hide();
+			$("#topBarPush").hide();
 		}
 		else{
 			$("#topBar").show();
+			$("#topBarPush").show();
 		}
         $("#title").html(newTitle);
 		$(newView).fadeIn('fast');
+		window["viewActive"] = newView;
 		if(hideMenu == true){
 			toggleMenu(false);
 		}
@@ -90,7 +90,7 @@ function showAlert(content,color){
 
 function loginSuccess(){
 	window["loggedIn"] = true;
-	switchView("#homeView","Home",true,false);
+	switchView("#homeView","Last 6 Hours",true,false);
 	getDevices();
 	setInterval(getDevices,5000);
 	$("#splash").fadeOut("fast");
@@ -168,13 +168,13 @@ function login(){
         return;
     }
 
-	switchView("#loadingView","Loading",false);
+	switchView("#loadingView","Loading",false,false);
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password),true);
     xhr.onload = function(){
         if(xhr.responseText == "FALSE"){
             notify("Wrong Email or Password", "Wrong Creds", "Try Again");
-			switchView("#loginView","Log In",false);
+			switchView("#loginView","Log In",false,false);
         }
         else if(xhr.responseText == "TRUE" || xhr.responseText == "ALREADY_LOGGED_IN"){
 			loginSuccess();
@@ -193,11 +193,11 @@ function logout(){
     xhr.onload = function(){
         if(xhr.responseText == "LOGGED_OUT")
         {
-            switchView("#loginView","Log In",false);
+            switchView("#loginView","Log In",false,true);
         }
 		else if(xhr.responseText == "ALREADY_LOGGED_OUT")
         {
-            switchView("#loginView","Log In",false);
+            switchView("#loginView","Log In",false,true);
         }
     }; 
     xhr.send();
@@ -230,7 +230,7 @@ function startApp(){
 		}
 		else{
 			window["oldView"] = "#loginView";
-			switchView("#loginView","Log In",false);
+			switchView("#loginView","Log In",false,false);
 		}
 	};   
 	xhr.send();
