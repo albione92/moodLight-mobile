@@ -1,4 +1,4 @@
-window["chartGran"] = 3;
+window["chartGran"] = 5;
 window["lastRender"] = Math.round(new Date().getTime()/1000.0);
 
 function getData(){

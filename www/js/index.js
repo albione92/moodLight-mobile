@@ -4,6 +4,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 window["devicesList"] = "NONE";
 window["menuState"] = false;
 window["gotData"] = false;
+window["info"] = "#infoEmotion";
 
 function onDeviceReady(){
     document.addEventListener("backbutton", function(e){
@@ -19,6 +20,10 @@ function onDeviceReady(){
 
 $(function() {
 	FastClick.attach(document.body);
+	if(localStorage.getItem("firstRun") != "no"){
+		alert("TUTORIAL");
+		localStorage.setItem("firstRun","no")
+	}
 	$("#email").val(localStorage.getItem("email"));
 	writeCredits();
 	setInterval(function(){
@@ -68,6 +73,13 @@ function writeCredits(){
 	$("#backerList").html(outString);
 }
 
+function showInfo(){
+	$("#infoButton").fadeOut("fast");
+	oldView = window["oldView"];
+	$("#infoContent").html($(window["info"]).html());
+	switchView("#infoView","Emotion Info",true,false,true);
+}
+
 function toggleMenu(state){
 		if(state == true){
 			window["menuState"] = state;
@@ -94,7 +106,7 @@ function notify(dialog, title, button){
 	}
 }
 
-function switchView(newView,newTitle,showHead,hideMenu){
+function switchView(newView,newTitle,showHead,hideMenu,hideInfo){
 	var oldView = window["oldView"];
 	$(oldView).fadeOut('fast', function(){
 		if(showHead == false){
@@ -113,6 +125,13 @@ function switchView(newView,newTitle,showHead,hideMenu){
 			}
 			if(newView == "#homeView" && window["gotData"] == false){
 				getData();
+			}
+			
+			if(hideInfo == true){
+				$("#infoButton").fadeOut("fast");
+			}
+			else if(hideInfo == false){
+				$("#infoButton").fadeIn("fast");
 			}
 		});
     });
@@ -142,7 +161,7 @@ function showAlert(content,color){
 
 function loginSuccess(){
 	window["loggedIn"] = true;
-	switchView("#homeView","Last 6 Hours",true,true);
+	switchView("#homeView","Last 6 Hours",true,true,false);
 	getDevices();
 	setInterval(getDevices,5000);
 	$("#splash").fadeOut("fast");
@@ -227,7 +246,7 @@ function signup(){
         return;
     }
 
-	switchView("#loadingView","Loading",false,false);
+	switchView("#loadingView","Loading",false,false,true);
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=register_user&email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password),true);
     xhr.onload = function(){
@@ -237,7 +256,7 @@ function signup(){
 			xhr2.onload = function(){
 				if(xhr2.responseText == "FALSE"){
 					notify(xhr2.responseText, "Bad Creds", "Try Again");
-					switchView("#signupView","Sign Up",false,false);
+					switchView("#signupView","Sign Up",false,false,true);
 				}
 				else if(xhr2.responseText == "TRUE" || xhr2.responseText == "ALREADY_LOGGED_IN"){
 					localStorage.setItem("email",email);
@@ -246,14 +265,14 @@ function signup(){
 				}
 				else{
 					notify(xhr2.responseText, "Error response (Login):", "Try Again");
-					switchView("#signupView","Sign Up",false,false);
+					switchView("#signupView","Sign Up",false,false,true);
 				}
 			};   
 			xhr2.send();
 		}
 		else{
 			notify(xhr.responseText, "Error response:", "Try Again");
-			switchView("#signupView","Sign Up",false,false);
+			switchView("#signupView","Sign Up",false,false,true);
 		}
     };   
     xhr.send();
@@ -277,13 +296,13 @@ function login(){
         return;
     }
 
-	switchView("#loadingView","Loading",false,false);
+	switchView("#loadingView","Loading",false,false,true);
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password),true);
     xhr.onload = function(){
         if(xhr.responseText == "FALSE"){
             notify("Wrong Email or Password", "Wrong Creds", "Try Again");
-			switchView("#loginView","Log In",false,false);
+			switchView("#loginView","Log In",false,false,true);
         }
         else if(xhr.responseText == "TRUE" || xhr.responseText == "ALREADY_LOGGED_IN"){
 			localStorage.setItem("email",email);
@@ -303,11 +322,11 @@ function logout(){
     xhr.onload = function(){
         if(xhr.responseText == "LOGGED_OUT")
         {
-            switchView("#loginView","Log In",false,true);
+            switchView("#loginView","Log In",false,true,true);
         }
 		else if(xhr.responseText == "ALREADY_LOGGED_OUT")
         {
-            switchView("#loginView","Log In",false,true);
+            switchView("#loginView","Log In",false,true,true);
         }
     }; 
     xhr.send();
@@ -340,7 +359,7 @@ function startApp(){
 		}
 		else{
 			window["oldView"] = "#loginView";
-			switchView("#loginView","Log In",false,false);
+			switchView("#loginView","Log In",false,false,true);
 		}
 	};   
 	xhr.send();

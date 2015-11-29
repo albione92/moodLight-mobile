@@ -436,6 +436,17 @@ footer{
 	box-shadow: inset 0px 0px 1em 0px rgba(0,0,0,0.5);
 }
 
+#infoButton{
+position: absolute;
+top: 0.8em;
+right: 0.8em;
+}
+
+#infoContent{
+padding: 1em;
+margin-bottom: 1em;
+}
+
 button{
 	width:95%;
 	font-size:1.0em;
@@ -459,7 +470,7 @@ input{
 	font-size: 1em;
 }
 
-.page{
+.page,.help{
 	display:none;
 }
 
@@ -543,6 +554,14 @@ h1{
   -o-animation-name: slideOut;
   -ms-animation-name: slideOut;
   animation-name: slideOut;
+}
+
+.slideStill{
+  -webkit-transform: translate3D(0, 0, 0);
+  -moz-transform: translate3D(0, 0, 0);
+  -o-transform: translate3D(0, 0, 0);
+  -ms-transform: translate3D(0, 0, 0);
+  transform: translate3D(0, 0, 0);
 }
 
 @-webkit-keyframes slideOut {

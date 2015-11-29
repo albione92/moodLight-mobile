@@ -18,12 +18,16 @@
 	<body>
 		<div id="splash"></div>
 		
-		<header id="topBar">
+		<header id="topBar" class="slideStill">
 			<div id="menuIcon" class="c-button" onclick="toggleMenu(true)">
 				<img src="img/menu.png" style="width:1.75em;">
 			</div>
 			<div id="title">
 			</div>
+			<div id="infoButton" onclick="showInfo();")>
+				<img src="img/info.png" style="width:1.75em;"/>
+			</div>
+			
 		</header>
 		<div id="topBarPush"></div>
 		
@@ -47,18 +51,18 @@
 		<div id="menu">
 			<div id="menuInner">
 				<div class="menu-top">
-					<img src="img/logoMenu.png"/ width="75%">
+					<img src="img/logoMenu.png" width="75%"/>
 					<div id="accountName">NAME HERE</div>
 					<div id="menu-signout" onclick="logout();">Sign out</div>
 				</div>
-				<div class="menu-li" onclick="switchView('#homeView','Last 6 Hours',true,true);">Stats</div>
-				<div class="menu-li" onclick="switchView('#controlView','Control',true,true);">Control</div>
-				<div class="menu-li" onclick="switchView('#archiveView','Archive',true,true);">Archive</div>
-				<div class="menu-li" onclick="switchView('#creditsView','Credits',true,true);">Credits</div>
+				<div class="menu-li" onclick="switchView('#homeView','Last 6 Hours',true,true,false);">Stats</div>
+				<div class="menu-li" onclick="switchView('#controlView','Control',true,true,true);">Control</div>
+				<div class="menu-li" onclick="switchView('#archiveView','Archive',true,true,true);">Archive</div>
+				<div class="menu-li" onclick="switchView('#creditsView','Credits',true,true,true);">Credits</div>
 			</div>
 		</div>
 	
-		<div id="container" class="slideOut">
+		<div id="container" class="slideStill">
 		<div id="mask" onclick="toggleMenu(false)"></div>
 		
 		<div id="loadingView" class="page">
@@ -67,6 +71,24 @@
 			</div>
 		</div> 
 
+		<div id="infoEmotion" class="help">
+			<span style="font-size: 7vw;margin-bottom:0.5em;margin-top:0.5em;display:block;">Welcome to moodLighting!</span>
+			We are an experimental emotional analytics service dedicated to studying the effect of both major and minor world events on human emotion!<br>&nbsp;<br>
+			We study six core emotions:<br>
+			<span style="color:#ff5eb1">Love</span>, 
+			<span style="color:#ffcc00">Joy</span>, 
+			<span style="color:#cc66ff">Surprise</span>, 
+			<span style="color:#b03c3c">Anger</span>, 
+			<span style="color:#1E8BFF">Sadness</span> 
+			and 
+			<span style="color:#00FFC6">Fear</span>.
+		</div> 
+		
+		<div id="infoView" class="page">
+			<div id="infoContent"></div>
+			<button id="infoBack" onclick="switchView('#homeView','Last 6 Hours',true,false,false);">Go Back</button>
+		</div> 
+		
 		<div id="loginView" class="page">
 			<div class="loginTop">
 				<div id="logo">
@@ -78,7 +100,7 @@
 				<input id="email" type="text" placeholder="Email" autocapitalize="none">
 				<input id="password" type="password" placeholder="Password" autocapitalize="none">
 				<button id="login" onclick="login();">Sign In</button>
-				<button id="signup" onclick="switchView('#signupView','Sign Up',false,true);">Sign Up</button>
+				<button id="signup" onclick="switchView('#signupView','Sign Up',false,true,true);">Sign Up</button>
 			</div>
 		</div> 
 		
@@ -94,7 +116,7 @@
 				<input id="passwordNew" type="password" placeholder="Password" autocapitalize="none">
 				<input id="passwordNew2" type="password" placeholder="Confirm Password" autocapitalize="none">
 				<button id="signup" onclick="signup();">Register</button>
-				<button id="cancel" onclick="switchView('#loginView','Log In',false,true);">Cancel</button>
+				<button id="cancel" onclick="switchView('#loginView','Log In',false,true,true);">Cancel</button>
 			</div>
 		</div> 
 
