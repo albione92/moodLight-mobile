@@ -190,6 +190,12 @@ div.google-visualization-tooltip { color:#000;padding:10px;margin-top:-10px;}
 .loginTop{
 	width:100%;
 	position:absolute;
+	top:10%;
+}
+
+.signupTop{
+	width:100%;
+	position:absolute;
 	top:5%;
 }
 
@@ -422,9 +428,12 @@ footer{
 	height:4.0em;
 	margin-bottom:0.5em;
 	text-align:center;
-	background-color:#303030;
+	background-color:#202020;
 	border:none;
 	color:#ccc;
+	-webkit-box-shadow: inset 0px 0px 1em 0px rgba(0,0,0,0.5);
+	-moz-box-shadow: inset 0px 0px 1em 0px rgba(0,0,0,0.5);
+	box-shadow: inset 0px 0px 1em 0px rgba(0,0,0,0.5);
 }
 
 button{

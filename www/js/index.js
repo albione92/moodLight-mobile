@@ -156,7 +156,7 @@ function getDevices(){
     xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=get_user_info",true);
     xhr.onload = function(){
 		data = JSON.parse(xhr.responseText);
-		window["username"] = data["username"];
+		window["username"] = encodeURIComponent(data["username"]);
 		window["email"] = data["email"];
 		$("#accountName").html(window["email"]);
 		if(xhr.responseText.substring(0, 13) == '{"devices":[]'){
