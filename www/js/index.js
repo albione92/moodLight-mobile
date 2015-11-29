@@ -15,6 +15,7 @@ function onDeviceReady(){
 }
 
 $(function() {
+	slideLeft.open();
     //FastClick.attach(document.body);
 });
 
