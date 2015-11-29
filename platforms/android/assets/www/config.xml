@@ -52,7 +52,6 @@
     <gap:plugin name="org.apache.cordova.dialogs" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
     <gap:plugin name="org.apache.cordova.network-information" />
-    <gap:plugin name="org.apache.cordova.splashscreen" />
 
     <!-- Third party plugins -->
 	<plugin name="edu.uic.travelmidwest.cordova.udptransmit" spec="0.0.1" source="pgb" />

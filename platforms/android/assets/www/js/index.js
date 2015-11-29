@@ -1,8 +1,36 @@
 startApp();
 
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady(){
+    document.addEventListener("backbutton", function(e){
+       if($.mobile.activePage.is('#homepage')){
+           e.preventDefault();
+           navigator.app.exitApp();
+       }
+       else {
+           navigator.app.backHistory()
+       }
+    }, false);
+}
+
 $(function() {
     FastClick.attach(document.body);
+	
 });
+
+function toggleMenu(state){
+	if(state == true){
+		$("body").css("overflow", "hidden");
+		$('#container').removeClass('slideOut').addClass('slideIn');
+		$('#mask').show();
+	}
+	else if(state == false){
+		$("body").css("overflow", "visible");
+		$('#container').removeClass('slideIn').addClass('slideOut');
+		$('#mask').hide();
+	}
+}
 
 function notify(dialog, title, button){
 	try{
