@@ -12,17 +12,22 @@
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script src='js/fastclick.js'></script>
 		<script src="https://www.google.com/jsapi"></script>
+
 	</head>
 	
 	<body>
 		<div id="splash"></div>
 		
-		<header id="topBar">
+		<header id="topBar" class="slideStill">
 			<div id="menuIcon" class="c-button" onclick="toggleMenu(true)">
 				<img src="img/menu.png" style="width:1.75em;">
 			</div>
 			<div id="title">
 			</div>
+			<div id="infoButton" onclick="showInfo();")>
+				<img src="img/info.png" style="width:1.75em;"/>
+			</div>
+			
 		</header>
 		<div id="topBarPush"></div>
 		
@@ -46,16 +51,18 @@
 		<div id="menu">
 			<div id="menuInner">
 				<div class="menu-top">
-					<img src="img/logoMenu.png"/ width="75%">
+					<img src="img/logoMenu.png" width="75%"/>
 					<div id="accountName">NAME HERE</div>
 					<div id="menu-signout" onclick="logout();">Sign out</div>
 				</div>
-				<div class="menu-li" onclick="switchView('#homeView','Last 6 Hours',true,true);">Stats</div>
-				<div class="menu-li" onclick="switchView('#controlView','Control',true,true);">Control</div>
+				<div class="menu-li" onclick="switchView('#homeView','Last 6 Hours',true,true,false);">Stats</div>
+				<div class="menu-li" onclick="switchView('#controlView','Control',true,true,true);">Control</div>
+				<div class="menu-li" onclick="switchView('#archiveView','Archive',true,true,true);">Archive</div>
+				<div class="menu-li" onclick="switchView('#creditsView','Credits',true,true,true);">Credits</div>
 			</div>
 		</div>
 	
-		<div id="container" class="slideOut">
+		<div id="container" class="slideStill">
 		<div id="mask" onclick="toggleMenu(false)"></div>
 		
 		<div id="loadingView" class="page">
@@ -64,45 +71,87 @@
 			</div>
 		</div> 
 
+		<div id="infoEmotion" class="help">
+			<span style="font-size: 7vw;margin-bottom:0.5em;margin-top:0.5em;display:block;">Welcome to moodLighting!</span>
+			We are an experimental emotional analytics service dedicated to studying the effect of both major and minor world events on human emotion!<br>&nbsp;<br>
+			We study six core emotions:<br>
+			<span style="color:#ff5eb1">Love</span>, 
+			<span style="color:#ffcc00">Joy</span>, 
+			<span style="color:#cc66ff">Surprise</span>, 
+			<span style="color:#b03c3c">Anger</span>, 
+			<span style="color:#1E8BFF">Sadness</span> 
+			and 
+			<span style="color:#00FFC6">Fear</span>.
+		</div> 
+		
+		<div id="infoView" class="page">
+			<div id="infoContent"></div>
+			<button id="infoBack" onclick="switchView('#homeView','Last 6 Hours',true,false,false);">Go Back</button>
+		</div> 
+		
 		<div id="loginView" class="page">
-			<div id="logo">
-				<img src="img/logo.png" style="width:8em;"/>
+			<div class="loginTop">
+				<div id="logo">
+					<img src="img/logo.png" style="width:8em;"/>
+				</div>
+				<div class="loginTitle">Sign In</div>
 			</div>
 			<div id="loginWindow">
 				<input id="email" type="text" placeholder="Email" autocapitalize="none">
 				<input id="password" type="password" placeholder="Password" autocapitalize="none">
-				<button onclick="login();">Login</button>
+				<button id="login" onclick="login();">Sign In</button>
+				<button id="signup" onclick="switchView('#signupView','Sign Up',false,true,true);">Sign Up</button>
+			</div>
+		</div> 
+		
+		<div id="signupView" class="page">
+			<div class="signupTop">
+				<div id="logo">
+					<img src="img/logo.png" style="width:8em;"/>
+				</div>
+				<div class="loginTitle">Sign Up</div>
+			</div>
+			<div id="signupWindow">
+				<input id="emailNew" type="text" placeholder="Email" autocapitalize="none">
+				<input id="passwordNew" type="password" placeholder="Password" autocapitalize="none">
+				<input id="passwordNew2" type="password" placeholder="Confirm Password" autocapitalize="none">
+				<button id="signup" onclick="signup();">Register</button>
+				<button id="cancel" onclick="switchView('#loginView','Log In',false,true,true);">Cancel</button>
 			</div>
 		</div> 
 
 		<div id="homeView" class="page">
 				<div class="chartTitle">
 					<div class='inner'>
-						Percentage
+						Percentage / Trends
 					</div>
 				</div>
-				<div id="chartPercent" class="outer" style="background-color:#121212">
+				<div id="chartPercent" class="outer" style="background-color:#080808">
+					<div class='inner'>Loading...</div>
 				</div>
 				<div class="chartTitle">
 					<div class='inner'>
 						Relative Significance
 					</div>
 				</div>
-				<div id="chartSignificance" class="outer" style="background-color:#080808">
+				<div id="chartSignificance" class="outer" style="background-color:#181818">
+					<div class='inner'>Loading...</div>
 				</div>
 				<div class="chartTitle">
 					<div class='inner'>
 						Phrases by Emotion
 					</div>
 				</div>
-				<div id="chartCount" class="outer" style="background-color:#121212">
+				<div id="chartCount" class="outer" style="background-color:#080808">
+					<div class='inner'>Loading...</div>
 				</div>
 				<div class="chartTitle">
 					<div class='inner'>
 						Phrases by Minute
 					</div>
 				</div>
-				<div id="chartPer" class="outer" style="background-color:#080808">
+				<div id="chartPer" class="outer" style="background-color:#181818">
+					<div class='inner'>Loading...</div>
 				</div>
 			
 			
@@ -115,6 +164,28 @@
 			<div class="sectionTitle">Custom Command</div>
 			<input id="command" type="text" value="101008000255000005000"/>
 			<button onclick="sendMessage();">SEND MESSAGE</button>
+		</div>
+		
+		<div id="creditsView" class="page">
+			<div class="creditsTitle">Lead Developer</div>
+				<div class="creditsName">Connor Nishijima</div>
+			<div class="creditsTitle">Built Using</div>
+				<div class="creditsName">Adobe Phonegap</div>
+				<div class="creditsName">Apache Cordova</div>
+				<div class="creditsName">Wordpress (CMS)</div>
+				<div class="creditsName">Flask (API)</div>
+				<div class="creditsName">jQuery</div>
+				
+			<div id="backerTitle">Very Special Thanks</div>
+				<div id="specialList">Special HERE</div>
+				
+			<div id="backerTitle">Funded By</div>
+				<div id="backerList">BACKERS HERE</div>
+				<div id="backerListAfter"></div>
+		</div>
+		
+		<div id="archiveView" class="page">
+			<div class="sectionTitle">Archive Data</div>
 		</div>
 		
 		</div>

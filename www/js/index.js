@@ -3,6 +3,8 @@ startApp();
 document.addEventListener("deviceready", onDeviceReady, false);
 window["devicesList"] = "NONE";
 window["menuState"] = false;
+window["gotData"] = false;
+window["info"] = "#infoEmotion";
 
 function onDeviceReady(){
     document.addEventListener("backbutton", function(e){
@@ -11,14 +13,72 @@ function onDeviceReady(){
            navigator.app.exitApp();
        }
        else {
-           navigator.app.backHistory()
+           navigator.app.backHistory();
        }
     }, false);
 }
 
 $(function() {
 	FastClick.attach(document.body);
+	if(localStorage.getItem("firstRun") != "no"){
+		alert("TUTORIAL");
+		localStorage.setItem("firstRun","no")
+	}
+	$("#email").val(localStorage.getItem("email"));
+	writeCredits();
+	setInterval(function(){
+		if(window["loggedIn"] == true){
+			getData();
+		}
+	},60000);
 });
+
+function writeCredits(){
+	specials = [
+		"Reggie Bellinger","G S Reddy","Marc DeBonis","Ken Nickerson","Chantelle Benson"
+	];
+	
+	backers = [
+		"Reggie Bellinger","G S Reddy","Marc DeBonis","Ken Nickerson","Cody Clendenen","FORCE LLC","Mike Mogenson","Ricky Wright",
+		"Josiah Means","Bates Research & Development","Jiten Chandiramani","Richard Tang","George Cisko","Derek Blankenship","Reese C. Hand","Paul Luchini",
+		"Xingyang Cai","Katherine McKenzie","Jason Noodle Laurianti","Pakorn Jaruspanavasan","Gail j","Nicholas Martin","SO32 2BL","Harrison Jones",
+		"Glynn Haystonopoulos","Rob Muehleisen","willis wolfgram","Mats Thell","Cory Benjamin","David Hamjediers","Ian Bailey",
+		"Steven M","Sam Lyon","Raphi Houri","Benjamin Garner","Markus Jahn","Todd Sims","Michelle Rose","Michael Stelzl",
+		"John","Roel kerkhofs","Auman Hartwig [R+D]","Torben Steeg","Justin Tyme","D J","Terri Ann","Geoff Coves",
+		"Amelior","Roberto","Austin Brown","Andrew Macdonald","Stacy Webb","robin van haelst","Michelle Arnell Jackson","Adam Tenhouse",
+		"Andy Fine","Chip Schnarel","Sam Paynter","Kaytlyn Cortes","KW","Jared Kotoff","Chris Cobb","jsmith0012",
+		"Daniel Hollands","Helen Errington","Martin Baratz","Mark Tokach","Franklin","Kadeem Warren","Pollyanna Ward","David Robertson",
+		"John Shoemaker","Narasimha Sairam Yamanoor","Dayle Payne","Reed Martin","Antonio","Jon Moss","Ben Gould","Hendrik Rommens",
+		"Sarah McGrew","Monty Cholmeley","Claus Österbauer","Justine Gastault","Christopher Danvers","Fraser Fitzgerald","M Müller","Robert Starliper",
+		"Dag Ströman","David Hochrein","William Lee","David Cornejo","Gary Kuhre","Tristan","Seeya Sia","Jacob Loukota",
+		"Stephan Groshek","yasmeen kashef","RJ"
+	];
+	
+	var outString = "";
+	specials.forEach(function(entry) {
+		outString+='<span class="specialName">';
+		outString+=entry.replace(" ","&nbsp;");
+		outString+='</span>';
+	});
+
+	$("#specialList").html(outString);
+	
+	var outString = "";
+	backers.forEach(function(entry) {
+		outString+='<span class="backerName">';
+		outString+=entry.replace(" ","&nbsp;");
+		outString+='</span>';
+	});
+
+	$("#backerList").html(outString);
+}
+
+function showInfo(){
+	$("#infoButton").fadeOut("fast");
+	oldView = window["oldView"];
+	$("#infoContent").html($(window["info"]).html());
+	switchView("#infoView","Emotion Info",true,false,true);
+}
 
 function toggleMenu(state){
 		if(state == true){
@@ -46,7 +106,7 @@ function notify(dialog, title, button){
 	}
 }
 
-function switchView(newView,newTitle,showHead,hideMenu){
+function switchView(newView,newTitle,showHead,hideMenu,hideInfo){
 	var oldView = window["oldView"];
 	$(oldView).fadeOut('fast', function(){
 		if(showHead == false){
@@ -58,11 +118,22 @@ function switchView(newView,newTitle,showHead,hideMenu){
 			$("#topBarPush").show();
 		}
         $("#title").html(newTitle);
-		$(newView).fadeIn('fast');
-		window["viewActive"] = newView;
-		if(hideMenu == true){
-			toggleMenu(false);
-		}
+		$(newView).fadeIn('fast',function(){
+			window["viewActive"] = newView;
+			if(hideMenu == true){
+				toggleMenu(false);
+			}
+			if(newView == "#homeView" && window["gotData"] == false){
+				getData();
+			}
+			
+			if(hideInfo == true){
+				$("#infoButton").fadeOut("fast");
+			}
+			else if(hideInfo == false){
+				$("#infoButton").fadeIn("fast");
+			}
+		});
     });
 	window["oldView"] = newView;
 }
@@ -90,11 +161,11 @@ function showAlert(content,color){
 
 function loginSuccess(){
 	window["loggedIn"] = true;
-	switchView("#homeView","Last 6 Hours",true,false);
+	switchView("#homeView","Last 6 Hours",true,true,false);
 	getDevices();
 	setInterval(getDevices,5000);
 	$("#splash").fadeOut("fast");
-	getData();
+	
 }
 
 function getDevices(){
@@ -103,6 +174,10 @@ function getDevices(){
 	var xhr = new XMLHttpRequest();
     xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=get_user_info",true);
     xhr.onload = function(){
+		data = JSON.parse(xhr.responseText);
+		window["username"] = encodeURIComponent(data["username"]);
+		window["email"] = data["email"];
+		$("#accountName").html(window["email"]);
 		if(xhr.responseText.substring(0, 13) == '{"devices":[]'){
 			outHTML =
 				"<div class='inform'>"+
@@ -113,15 +188,10 @@ function getDevices(){
 				
 			$("#deviceList").html(outHTML);
 		}
-		else{
+		else{			
 			if(xhr.responseText != window["devicesList"]){
 				window["devicesList"] = xhr.responseText;
 				outHTML = "";
-				data = JSON.parse(xhr.responseText);
-				window["username"] = data["username"];
-				window["email"] = data["email"];
-				
-				$("#accountName").html(window["email"]);
 				
 				data["devices"].forEach(function(entry) {
 					nickname = entry["nickname"].replace("_", " ");
@@ -153,6 +223,63 @@ function getDevices(){
 	}
 }
 
+function signup(){
+	var email = document.getElementById("emailNew").value;
+	var password = document.getElementById("passwordNew").value;
+	var password2 = document.getElementById("passwordNew2").value;
+
+    if(email == "")
+    {
+        notify("Please enter your email", "Email Missing", "OK");
+        return;
+    }
+
+    if(password == "")
+    {
+        notify("Please enter a password","Password Missing", "OK"); 
+        return;
+    }
+	
+	if(password2 != password)
+    {
+        notify("Password inputs do not match!","Password Mismatch", "OK"); 
+        return;
+    }
+
+	switchView("#loadingView","Loading",false,false,true);
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=register_user&email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password),true);
+    xhr.onload = function(){
+        if(xhr.responseText == "TRUE" || xhr.responseText == "ALREADY_LOGGED_IN" || xhr.responseText == "USER_EXISTS"){
+			var xhr2 = new XMLHttpRequest();
+			xhr2.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password),true);
+			xhr2.onload = function(){
+				if(xhr2.responseText == "FALSE"){
+					notify(xhr2.responseText, "Bad Creds", "Try Again");
+					switchView("#signupView","Sign Up",false,false,true);
+				}
+				else if(xhr2.responseText == "TRUE" || xhr2.responseText == "ALREADY_LOGGED_IN"){
+					localStorage.setItem("email",email);
+					$("#email").val(email);
+					loginSuccess();
+				}
+				else{
+					notify(xhr2.responseText, "Error response (Login):", "Try Again");
+					switchView("#signupView","Sign Up",false,false,true);
+				}
+			};   
+			xhr2.send();
+		}
+		else{
+			notify(xhr.responseText, "Error response:", "Try Again");
+			switchView("#signupView","Sign Up",false,false,true);
+		}
+    };   
+    xhr.send();
+	
+	
+}
+
 function login(){
 	var email = document.getElementById("email").value;
 	var password = document.getElementById("password").value;
@@ -169,15 +296,16 @@ function login(){
         return;
     }
 
-	switchView("#loadingView","Loading",false,false);
+	switchView("#loadingView","Loading",false,false,true);
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password),true);
     xhr.onload = function(){
         if(xhr.responseText == "FALSE"){
             notify("Wrong Email or Password", "Wrong Creds", "Try Again");
-			switchView("#loginView","Log In",false,false);
+			switchView("#loginView","Log In",false,false,true);
         }
         else if(xhr.responseText == "TRUE" || xhr.responseText == "ALREADY_LOGGED_IN"){
+			localStorage.setItem("email",email);
 			loginSuccess();
 		}
 		else{
@@ -194,11 +322,11 @@ function logout(){
     xhr.onload = function(){
         if(xhr.responseText == "LOGGED_OUT")
         {
-            switchView("#loginView","Log In",false,true);
+            switchView("#loginView","Log In",false,true,true);
         }
 		else if(xhr.responseText == "ALREADY_LOGGED_OUT")
         {
-            switchView("#loginView","Log In",false,true);
+            switchView("#loginView","Log In",false,true,true);
         }
     }; 
     xhr.send();
@@ -231,7 +359,7 @@ function startApp(){
 		}
 		else{
 			window["oldView"] = "#loginView";
-			switchView("#loginView","Log In",false,false);
+			switchView("#loginView","Log In",false,false,true);
 		}
 	};   
 	xhr.send();
