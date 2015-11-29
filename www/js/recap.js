@@ -98,11 +98,11 @@ function drawData(){
 				colors: ['#ff5eb1', '#ffcc00', '#cc66ff', '#b03c3c', '#1E8BFF', '#00FFC6', '#727272','#999999','#fb8100'],
 				backgroundColor: 'none',
 				is3D: true,
-				hAxis: {gridlines: {color: 'none'},textStyle:{color: '#484848'},textPosition:'in'},
-				vAxis: {gridlines: {color: 'none'},textStyle:{color: '#484848'},textPosition:'in',viewWindow: {min: 45}},
+				hAxis: {gridlines: {color: 'none'},textStyle:{color: '#999999'},textPosition:'out'},
+				vAxis: {gridlines: {color: 'none'},textStyle:{color: '#999999'},textPosition:'in',viewWindow: {min: 45}},
 				smoothLine: true,
-				chartArea: {'width': '100%', 'height': '100%'},
-				series: {
+				chartArea: {'width': '100%', 'height': '80%'},
+				series: { 
 					8: {type: 'area'},
 					7: {type: 'area',lineWidth: 4}
 				},
@@ -168,17 +168,16 @@ function drawData(){
 			var chart = new google.visualization.LineChart(document.getElementById('chartSignificance'));
 
 			var options = {
-				title: 'Relative Significance last 6 hours',
 				colors: ['#ff5eb1', '#ffcc00', '#cc66ff', '#b03c3c', '#1E8BFF', '#00FFC6', '#727272','#999999','#fb8100'],
 				backgroundColor: 'none',
 				is3D: true,
-				hAxis: {gridlines: {color: 'none'},textStyle:{color: '#484848'},textPosition:'in'},
-				vAxis: {gridlines: {color: 'none'},textStyle:{color: '#484848'},textPosition:'in',viewWindow: {min: 0}},
+				hAxis: {gridlines: {color: 'none'},textStyle:{color: '#999999'},textPosition:'out'},
+				vAxis: {gridlines: {color: 'none'},textStyle:{color: '#999999'},textPosition:'in',viewWindow: {min: 0}},
 				smoothLine: true,
-				chartArea: {'width': '100%', 'height': '100%'},
+				chartArea: {'width': '100%', 'height': '80%'},
 				areaOpacity:0.1,
 				tooltip: { isHtml: true },
-				legend: {'position': 'bottom'},
+				legend: {'position': 'none'},
 				titleTextStyle: {color: '#cccccc'},
 				legendTextStyle: {color: '#cccccc'},
 				lineWidth: 1,
@@ -237,15 +236,14 @@ function drawData(){
 			var chart = new google.visualization.LineChart(document.getElementById('chartCount'));
 
 			var options = {
-				title: 'Emotion counts last 6 hours',
 				colors: ['#ff5eb1', '#ffcc00', '#cc66ff', '#b03c3c', '#1E8BFF', '#00FFC6', '#727272','#999999','#fb8100'],
 				backgroundColor: 'none',
 				is3D: true,
-				hAxis: {gridlines: {color: 'none'},textStyle:{color: '#484848'},textPosition:'in'},
-				vAxis: {gridlines: {color: 'none'},textStyle:{color: '#484848'},textPosition:'in',viewWindow: {min: 0}},
+				hAxis: {gridlines: {color: 'none'},textStyle:{color: '#999999'},textPosition:'out'},
+				vAxis: {gridlines: {color: 'none'},textStyle:{color: '#999999'},textPosition:'in',viewWindow: {min: 0}},
 				smoothLine: false,
-				chartArea: {'width': '100%', 'height': '100%'},
-				legend: {'position': 'bottom'},
+				chartArea: {'width': '100%', 'height': '80%'},
+				legend: {'position': 'none'},
 				titleTextStyle: {color: '#cccccc'},
 				legendTextStyle: {color: '#cccccc'},
 				lineWidth: 1,
@@ -281,27 +279,26 @@ function drawData(){
 					i+=window["chartGran"];
 				}
 			}
-			catch(err){ 
+			catch(err){
 				i = 30000
 			}
 
 			var chart = new google.visualization.LineChart(document.getElementById("chartPer"));
 
 			var options = {
-				title: 'Phrases Matched last 6 hours',
 				colors: ['#ff0000'],
 				backgroundColor: 'none',
 				is3D: true,
-				hAxis: {gridlines: {color: 'none'},textStyle:{color: '#484848'},textPosition:'in'},
-				vAxis: {gridlines: {color: 'none'},textStyle:{color: '#484848'},textPosition:'in',viewWindow: {min: 55}},
+				hAxis: {gridlines: {color: 'none'},textStyle:{color: '#999999'},textPosition:'out'},
+				vAxis: {gridlines: {color: 'none'},textStyle:{color: '#999999'},textPosition:'in',viewWindow: {min: 55}},
 				smoothLine: true,
-				chartArea: {'width': '100%', 'height': '100%'},
+				chartArea: {'width': '100%', 'height': '80%'},
 				series: {
 					0: {type: 'area'},
 				},
 				areaOpacity:0.25,
 				tooltip: { isHtml: true },
-				legend: {'position': 'bottom'},
+				legend: {'position': 'none'},
 				titleTextStyle: {color: '#cccccc'},
 				legendTextStyle: {color: '#cccccc'},
 				lineWidth: 1,
