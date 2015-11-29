@@ -64,9 +64,28 @@ background-color:#181818;
 	padding:0em;
 }
 
+#accountName{
+	margin-top:0.5em;
+	font-weight:bold;
+	margin-bottom:0.5em;
+}
+
+#menu-signout{
+	color:#61BDA6;
+}
+
 .menu-li{
+	border-bottom:1px solid #121212;
+	border-top:1px solid #242424;
+	padding:1em;
+	font-weight:bold;
+}
+
+.menu-top{
+	background-color:#121212;
 	border-bottom:1px solid #242424;
 	padding:1em;
+	padding-top:1.25em;
 }
 
 .menu-li:active{
@@ -91,6 +110,7 @@ header{
 	height: 3.5em;
 	margin-bottom:0.5em;
     font-weight: bold;
+	font-size:1.2em;
 }
 
 #logo{
@@ -131,15 +151,99 @@ header{
 
 #menuIcon{
 	display:inline-block;
-	margin-left: 1em;
-    margin-top: 1em;
+	margin-left: 0.8em;
+    margin-top: 0.8em;
 }
 
 #title{
 	display:inline-block;
 	position: relative;
-    top: -0.4em;
-    left: 0.3em;
+    top: -0.45em;
+    left: 0.8em;
+}
+
+#deviceList{
+	margin-bottom:0.5em;
+}
+
+.inform{
+	width:95%;
+	margin-left:2.5%;
+	margin-right:2.5%;
+	margin-bottom:0.25em;
+	height:3.5em;
+}
+
+.inform .inner{
+	padding:1em;
+	color:#fff;
+	background-color: rgba(255, 233, 174, 0.25);
+	border:0.2em solid #FFD696;
+}
+
+.sectionTitle{
+	font-size:1.25em;
+	font-weight:bold;
+	margin-left:0.5em;
+	margin-top:1em;
+	margin-bottom:0.5em;
+}
+
+.divider{
+	margin-top:1em;
+	margin-left:0.5em;
+	margin-right:0.5em;
+	border-bottom:0.15em solid #363636;
+}
+
+#deviceList{
+}
+
+.deviceli{
+	width:95%;
+	margin-left:2.5%;
+	margin-right:2.5%;
+	background-color:#181818;
+	margin-bottom:0.25em;
+	padding-top:0.25em;
+	height:3.5em;
+}
+
+.deviceli .inner{
+	padding:1em;
+}
+
+.deviceli .nick{
+	font-weight:bold;
+	float:left;
+}
+
+.deviceli .ip{
+	color:#666666;
+	text-transform:capitalize;
+	font-weight:normal;
+	float:right;
+}
+
+.messages,.alerts{
+	display:none;
+	-webkit-box-shadow: 0em 0em 1em 0em rgba(0,0,0,0.75);
+	-moz-box-shadow: 0em 0em 1em 0em rgba(0,0,0,0.75);
+	box-shadow: 0em 0em 1em 0em rgba(0,0,0,0.75);
+	width:100%;
+	background-color:#235f34;
+	position:absolute;
+	bottom:0em;
+	left:0em;
+}
+
+.messages .inner,.alerts .inner{
+	padding:1em;
+}
+
+.messages .title{
+	font-weight:bold;
+	margin-bottom:0.25em;
 }
 
 footer{

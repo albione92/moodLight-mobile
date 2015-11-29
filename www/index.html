@@ -13,11 +13,15 @@
 	</head>
 	
 	<body>
-	
 		<div id="menu">
 			<div id="menuInner">
-					<div class="menu-li" onclick="switchView('#homeView','Home',true);">Home</div>
-					<div class="menu-li" onclick="switchView('#controlView','Control',true);">Control</div>
+				<div class="menu-top">
+					<img src="img/logoMenu.png"/ width="75%">
+					<div id="accountName">NAME HERE</div>
+					<div id="menu-signout" onclick="logout();">Sign out</div>
+				</div>
+				<div class="menu-li" onclick="switchView('#homeView','Home',true);">Home</div>
+				<div class="menu-li" onclick="switchView('#controlView','Control',true);">Control</div>
 			</div>
 		</div>
 	
@@ -26,11 +30,28 @@
 	
 		<header id="topBar">
 			<div id="menuIcon" class="c-button" onclick="toggleMenu(true)">
-				<img src="img/menu.png" style="width:1.5em;">
+				<img src="img/menu.png" style="width:1.75em;">
 			</div>
 			<div id="title">
 			</div>
 		</header>
+		
+		<div class="alerts">
+			<div class="inner">
+				ALERT HERE!
+			</div>
+		</div>
+		
+		<div class="messages">
+			<div class="inner">
+				<div class="title">
+					MESSAGE HERE!
+				</div>
+				<div class="content">
+					Here is the content. It will automatically stretch the height of it's container as neccessary.
+				</div>
+			</div>
+		</div>
 		
 		<div id="loadingView" class="page">
 			<div id="loadingWindow">
@@ -50,10 +71,14 @@
 		</div> 
 
 		<div id="homeView" class="page">
-			<button onclick="logout();">LOG OUT</button>
+			HOME CONTENT HERE
 		</div>
 		
 		<div id="controlView" class="page">
+			<div class="sectionTitle">moodLight Devices</div>
+			<div id="deviceList"></div>
+			<div class="divider"></div>
+			<div class="sectionTitle">Custom Command</div>
 			<input id="command" type="text" value="101008000255000005000"/>
 			<button onclick="sendMessage();">SEND MESSAGE</button>
 		</div>

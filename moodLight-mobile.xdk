@@ -6,7 +6,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "",
       "projectGuid": "24ae289c-6c62-46c4-a544-a090676441a0",
-      "lastModifiedDate": 1448754760158,
+      "lastModifiedDate": 1448767940277,
       "creationDate": 1448754747799
     },
     "sourceDirectory": "www",
@@ -92,7 +92,7 @@
       {
         "version": "1.0.1",
         "sourceLocation": "",
-        "selectedState": "Auto",
+        "selectedState": "Included",
         "name": "Device",
         "originType": "cordova.io",
         "id": "cordova-plugin-device",
@@ -101,12 +101,16 @@
         "paramvals": {},
         "permissions": {},
         "dependsOn": [],
-        "dependedBy": []
+        "dependedBy": [],
+        "topLevel": true,
+        "checksum": "adfc61ba",
+        "gitref": "",
+        "description": "Cordova Device Plugin"
       },
       {
         "version": "2.1.0",
         "sourceLocation": "",
-        "selectedState": "Auto",
+        "selectedState": "Included",
         "name": "Splashscreen",
         "originType": "cordova.io",
         "id": "cordova-plugin-splashscreen",
@@ -115,7 +119,12 @@
         "paramvals": {},
         "permissions": {},
         "dependsOn": [],
-        "dependedBy": []
+        "dependedBy": [],
+        "topLevel": true,
+        "checksum": "170efb68",
+        "gitref": "",
+        "cordovaVersion": ">=3.2.0",
+        "description": "Cordova Splashscreen Plugin"
       }
     ],
     "serviceMethods": [],

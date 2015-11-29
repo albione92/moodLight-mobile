@@ -1,6 +1,7 @@
 startApp();
 
 document.addEventListener("deviceready", onDeviceReady, false);
+window["devicesList"] = "NONE";
 
 function onDeviceReady(){
     document.addEventListener("backbutton", function(e){
@@ -16,7 +17,6 @@ function onDeviceReady(){
 
 $(function() {
     FastClick.attach(document.body);
-	
 });
 
 function toggleMenu(state){
@@ -57,6 +57,90 @@ function switchView(newView,newTitle,showHead){
 	window["oldView"] = newView;
 }
 
+function showMessage(title,content,color){
+	color = color || "#235f34";
+	$('.messages').css('background-color',color);
+	$( ".messages > .inner > .title" ).html(title);
+	$( ".messages > .inner > .content" ).html(content);
+	$('.messages').fadeIn("fast");
+	setTimeout(function(){
+		$('.messages').fadeOut("fast");
+	},3000);
+}
+
+function showAlert(content,color){
+	color = color || "#235f34";
+	$('.alerts').css('background-color',color);
+	$( ".alerts > .inner").html(content);
+	$('.alerts').fadeIn("fast");
+	setTimeout(function(){
+		$('.alerts').fadeOut("fast");
+	},3000);
+}
+
+function loginSuccess(){
+	window["loggedIn"] = true;
+	switchView("#homeView","Home");
+	getDevices();
+	setInterval(getDevices,5000);
+}
+
+function getDevices(){
+	if(window["loggedIn"] == true){
+		
+	var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=get_user_info",true);
+    xhr.onload = function(){
+		if(xhr.responseText.substring(0, 13) == '{"devices":[]'){
+			outHTML =
+				"<div class='inform'>"+
+					"<div class='inner'>"+
+						"No devices added!"+
+					"</div>"+
+				"</div>";
+				
+			$("#deviceList").html(outHTML);
+		}
+		else{
+			if(xhr.responseText != window["devicesList"]){
+				window["devicesList"] = xhr.responseText;
+				outHTML = "";
+				data = JSON.parse(xhr.responseText);
+				window["username"] = data["username"];
+				window["email"] = data["email"];
+				
+				$("#accountName").html(window["email"]);
+				
+				data["devices"].forEach(function(entry) {
+					nickname = entry["nickname"];
+					mode = entry["mode"];
+					ip = entry["ip"];
+					outHTML += 
+						"<div class='deviceli'>"+
+							"<div class='inner'>"+
+								"<span class='nick'>"+
+									nickname+
+								"</span>"+
+								"<span class='ip'>"+
+									ip+
+								"</span>"+
+							"</div>"+
+						"</div>";
+				});
+				$("#deviceList").fadeOut("fast",function(){
+					$("#deviceList").html(outHTML);
+					$("#deviceList").fadeIn("fast");
+					showAlert("Device list updated!");
+				});
+					
+			}
+		}
+    };   
+    xhr.send();
+	
+	}
+}
+
 function login(){
 	var username = document.getElementById("username").value;
 	var password = document.getElementById("password").value;
@@ -82,8 +166,8 @@ function login(){
 			switchView("#loginView","Log In",false);
         }
         else if(xhr.responseText == "TRUE" || xhr.responseText == "ALREADY_LOGGED_IN"){
-            switchView("#homeView","Home");
-        }
+			loginSuccess();
+		}
 		else{
 			notify(xhr.responseText, "Error response:", "Try Again");
 		}
@@ -92,6 +176,7 @@ function login(){
 }
 
 function logout(){
+	window["loggedIn"] = false;
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=logout",true);
     xhr.onload = function(){
@@ -112,6 +197,7 @@ function sendMessage(){
 		var command = String(document.getElementById("command").value);
 		udptransmit.initialize("192.168.1.193", 2390);
 		udptransmit.sendMessage("%"+command+"\n");
+		showAlert("Sent UDP: '%"+command+"\\n'");
 	}
 	catch(err) {
 		notify(err.message,"Error", "OK");  
@@ -130,7 +216,7 @@ function startApp(){
 	xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password),true);
 	xhr.onload = function(){
 		if(xhr.responseText == "ALREADY_LOGGED_IN"){
-			switchView("#homeView","Home");
+			loginSuccess();
 		}
 	};   
 	xhr.send();
