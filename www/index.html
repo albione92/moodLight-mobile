@@ -52,6 +52,8 @@
 				</div>
 				<div class="menu-li" onclick="switchView('#homeView','Last 6 Hours',true,true);">Stats</div>
 				<div class="menu-li" onclick="switchView('#controlView','Control',true,true);">Control</div>
+				<div class="menu-li" onclick="switchView('#archiveView','Archive',true,true);">Archive</div>
+				<div class="menu-li" onclick="switchView('#creditsView','Credits',true,true);">Credits</div>
 			</div>
 		</div>
 	
@@ -82,7 +84,7 @@
 						Percentage / Trends
 					</div>
 				</div>
-				<div id="chartPercent" class="outer" style="background-color:#121212">
+				<div id="chartPercent" class="outer" style="background-color:#080808">
 					<div class='inner'>Loading...</div>
 				</div>
 				<div class="chartTitle">
@@ -90,21 +92,24 @@
 						Relative Significance
 					</div>
 				</div>
-				<div id="chartSignificance" class="outer" style="background-color:#080808">
+				<div id="chartSignificance" class="outer" style="background-color:#181818">
+					<div class='inner'>Loading...</div>
 				</div>
 				<div class="chartTitle">
 					<div class='inner'>
 						Phrases by Emotion
 					</div>
 				</div>
-				<div id="chartCount" class="outer" style="background-color:#121212">
+				<div id="chartCount" class="outer" style="background-color:#080808">
+					<div class='inner'>Loading...</div>
 				</div>
 				<div class="chartTitle">
 					<div class='inner'>
 						Phrases by Minute
 					</div>
 				</div>
-				<div id="chartPer" class="outer" style="background-color:#080808">
+				<div id="chartPer" class="outer" style="background-color:#181818">
+					<div class='inner'>Loading...</div>
 				</div>
 			
 			
@@ -117,6 +122,28 @@
 			<div class="sectionTitle">Custom Command</div>
 			<input id="command" type="text" value="101008000255000005000"/>
 			<button onclick="sendMessage();">SEND MESSAGE</button>
+		</div>
+		
+		<div id="creditsView" class="page">
+			<div class="creditsTitle">Lead Developer</div>
+				<div class="creditsName">Connor Nishijima</div>
+			<div class="creditsTitle">Built Using</div>
+				<div class="creditsName">Adobe Phonegap</div>
+				<div class="creditsName">Apache Cordova</div>
+				<div class="creditsName">Wordpress (CMS)</div>
+				<div class="creditsName">Flask (API)</div>
+				<div class="creditsName">jQuery</div>
+				
+			<div id="backerTitle">Very Special Thanks</div>
+				<div id="specialList">Special HERE</div>
+				
+			<div id="backerTitle">Funded By</div>
+				<div id="backerList">BACKERS HERE</div>
+				<div id="backerListAfter"></div>
+		</div>
+		
+		<div id="archiveView" class="page">
+			<div class="sectionTitle">Archive Data</div>
 		</div>
 		
 		</div>

@@ -125,7 +125,7 @@ div.google-visualization-tooltip { color:#000;padding:10px;margin-top:-10px;}
 	padding:1em;
 	padding-top:1.5em;
 	font-weight:bold;
-	height:2em;
+	height:1.75em;
 }
 
 .menu-top{
@@ -162,6 +162,9 @@ div.google-visualization-tooltip { color:#000;padding:10px;margin-top:-10px;}
 	top:0px;
 	position:fixed;
 	z-index:9999;
+	-webkit-box-shadow: 0px 0px 1em 0px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0px 0px 1em 0px rgba(0,0,0,0.5);
+	box-shadow: 0px 0px 1em 0px rgba(0,0,0,0.5);
 }
 
 #topBarPush{
@@ -267,6 +270,72 @@ div.google-visualization-tooltip { color:#000;padding:10px;margin-top:-10px;}
 	margin-left:0.5em;
 	margin-right:0.5em;
 	border-bottom:0.15em solid #363636;
+}
+
+.creditsTitle{
+	float:left;
+	width:100%;
+	margin-top:1em;
+	margin-bottom:1em;
+	margin-left:0.5em;
+	margin-right:0.5em;
+	font-weight:bold;
+	font-size:1.25em;
+}
+
+.creditsName{
+	margin-top:0.5em;
+	margin-left:1em;
+	margin-right:0.5em;
+	color:#999999;
+}
+
+#backerTitle{
+	width:100%;
+	float:left;
+	margin-top:1em;
+	margin-bottom:0.5em;
+	margin-left:0.5em;
+	margin-right:0.5em;
+	font-weight:bold;
+	font-size:1.25em;
+}
+
+.backerName{
+	display:inline;
+	float:left;
+	margin:0.25em;
+	padding:0.5em;
+	font-size:0.7em;
+	background-color:#202020;
+	border-radius:0.5em;
+	color:#888888;
+	word-wrap: normal;
+}
+
+.creditsName,.specialName{
+	display:inline;
+	float:left;
+	margin:0.25em;
+	padding:0.5em;
+	background-color:#202020;
+	border-radius:0.5em;
+	color:#888888;
+	word-wrap: normal;
+}
+
+#backerList,#specialList,{
+	float:left;
+	width:95%;
+	margin-left:0.5em;
+	display:block;
+}
+
+#backerListAfter{
+	float:left;
+	width:100%;
+	display:block;
+	height:1em;
 }
 
 #deviceList{

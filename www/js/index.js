@@ -19,12 +19,53 @@ function onDeviceReady(){
 
 $(function() {
 	FastClick.attach(document.body);
+	writeCredits();
 	setInterval(function(){
 		if(window["loggedIn"] == true){
 			getData();
 		}
 	},60000);
 });
+
+function writeCredits(){
+	specials = [
+		"Reggie Bellinger","G S Reddy","Marc DeBonis","Ken Nickerson","Chantelle Benson"
+	];
+	
+	backers = [
+		"Reggie Bellinger","G S Reddy","Marc DeBonis","Ken Nickerson","Cody Clendenen","FORCE LLC","Mike Mogenson","Ricky Wright",
+		"Josiah Means","Bates Research & Development","Jiten Chandiramani","Richard Tang","George Cisko","Derek Blankenship","Reese C. Hand","Paul Luchini",
+		"Xingyang Cai","Katherine McKenzie","Jason Noodle Laurianti","Pakorn Jaruspanavasan","Gail j","Nicholas Martin","SO32 2BL","Harrison Jones",
+		"Glynn Haystonopoulos","Rob Muehleisen","willis wolfgram","Mats Thell","Cory Benjamin","David Hamjediers","Ian Bailey",
+		"Steven M","Sam Lyon","Raphi Houri","Benjamin Garner","Markus Jahn","Todd Sims","Michelle Rose","Michael Stelzl",
+		"John","Roel kerkhofs","Auman Hartwig [R+D]","Torben Steeg","Justin Tyme","D J","Terri Ann","Geoff Coves",
+		"Amelior","Roberto","Austin Brown","Andrew Macdonald","Stacy Webb","robin van haelst","Michelle Arnell Jackson","Adam Tenhouse",
+		"Andy Fine","Chip Schnarel","Sam Paynter","Kaytlyn Cortes","KW","Jared Kotoff","Chris Cobb","jsmith0012",
+		"Daniel Hollands","Helen Errington","Martin Baratz","Mark Tokach","Franklin","Kadeem Warren","Pollyanna Ward","David Robertson",
+		"John Shoemaker","Narasimha Sairam Yamanoor","Dayle Payne","Reed Martin","Antonio","Jon Moss","Ben Gould","Hendrik Rommens",
+		"Sarah McGrew","Monty Cholmeley","Claus Österbauer","Justine Gastault","Christopher Danvers","Fraser Fitzgerald","M Müller","Robert Starliper",
+		"Dag Ströman","David Hochrein","William Lee","David Cornejo","Gary Kuhre","Tristan","Seeya Sia","Jacob Loukota",
+		"Stephan Groshek","yasmeen kashef","RJ"
+	];
+	
+	var outString = "";
+	specials.forEach(function(entry) {
+		outString+='<span class="specialName">';
+		outString+=entry.replace(" ","&nbsp;");
+		outString+='</span>';
+	});
+
+	$("#specialList").html(outString);
+	
+	var outString = "";
+	backers.forEach(function(entry) {
+		outString+='<span class="backerName">';
+		outString+=entry.replace(" ","&nbsp;");
+		outString+='</span>';
+	});
+
+	$("#backerList").html(outString);
+}
 
 function toggleMenu(state){
 		if(state == true){

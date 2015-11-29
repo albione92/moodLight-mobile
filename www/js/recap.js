@@ -2,10 +2,12 @@ window["chartGran"] = 3;
 window["lastRender"] = Math.round(new Date().getTime()/1000.0);
 
 function getData(){
+		$( ".outer > .inner").html("Fetching...");
 		$.getJSON("http://moodlighting.co/6hour.json", function(result){
 			window["JSONdata"] = result;
 			var perMin = parseInt(result["data"][0]["phrases_min"]);
 			if(perMin > 0){
+				$( ".outer > .inner").html("Rendering...");
 				setTimeout(drawData,500);
 			}
 			else{
@@ -239,7 +241,7 @@ function drawData(){
 				is3D: true,
 				hAxis: {gridlines: {color: 'none'},textStyle:{color: '#999999'},textPosition:'out'},
 				vAxis: {gridlines: {color: 'none'},textStyle:{color: '#999999'},textPosition:'in',viewWindow: {min: 0}},
-				smoothLine: false,
+				smoothLine: true,
 				chartArea: {'width': '100%', 'height': '80%'},
 				legend: {'position': 'none'},
 				titleTextStyle: {color: '#cccccc'},
@@ -295,10 +297,7 @@ function drawData(){
 					0: {type: 'area'},
 				},
 				areaOpacity:0.25,
-				tooltip: { isHtml: true },
 				legend: {'position': 'none'},
-				titleTextStyle: {color: '#cccccc'},
-				legendTextStyle: {color: '#cccccc'},
 				lineWidth: 1,
 			}
 
