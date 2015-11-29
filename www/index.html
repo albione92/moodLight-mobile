@@ -12,6 +12,7 @@
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script src='js/fastclick.js'></script>
 		<script src="https://www.google.com/jsapi"></script>
+
 	</head>
 	
 	<body>
@@ -67,14 +68,33 @@
 		</div> 
 
 		<div id="loginView" class="page">
-			<div id="logo">
-				<img src="img/logo.png" style="width:8em;"/>
+			<div class="loginTop">
+				<div id="logo">
+					<img src="img/logo.png" style="width:8em;"/>
+				</div>
+				<div class="loginTitle">moodLighting</div>
 			</div>
 			<div id="loginWindow">
 				<input id="email" type="text" placeholder="Email" autocapitalize="none">
 				<input id="password" type="password" placeholder="Password" autocapitalize="none">
 				<button id="login" onclick="login();">Sign In</button>
-				<button id="signup" onclick="signup();">Sign Up</button>
+				<button id="signup" onclick="switchView('#signupView','Sign Up',false,true);">Sign Up</button>
+			</div>
+		</div> 
+		
+		<div id="signupView" class="page">
+			<div class="loginTop">
+				<div id="logo">
+					<img src="img/logo.png" style="width:8em;"/>
+				</div>
+				<div class="loginTitle">Sign Up</div>
+			</div>
+			<div id="signupWindow">
+				<input id="emailNew" type="text" placeholder="Email" autocapitalize="none">
+				<input id="passwordNew" type="password" placeholder="Password" autocapitalize="none">
+				<input id="passwordNew2" type="password" placeholder="Confirm Password" autocapitalize="none">
+				<button id="signup" onclick="signup();">Register</button>
+				<button id="cancel" onclick="switchView('#loginView','Log In',false,true);">Cancel</button>
 			</div>
 		</div> 
 

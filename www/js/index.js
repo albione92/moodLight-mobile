@@ -12,13 +12,14 @@ function onDeviceReady(){
            navigator.app.exitApp();
        }
        else {
-           navigator.app.backHistory()
+           navigator.app.backHistory();
        }
     }, false);
 }
 
 $(function() {
 	FastClick.attach(document.body);
+	$("#email").val(localStorage.getItem("email"));
 	writeCredits();
 	setInterval(function(){
 		if(window["loggedIn"] == true){
@@ -141,7 +142,7 @@ function showAlert(content,color){
 
 function loginSuccess(){
 	window["loggedIn"] = true;
-	switchView("#homeView","Last 6 Hours",true,false);
+	switchView("#homeView","Last 6 Hours",true,true);
 	getDevices();
 	setInterval(getDevices,5000);
 	$("#splash").fadeOut("fast");
@@ -154,6 +155,10 @@ function getDevices(){
 	var xhr = new XMLHttpRequest();
     xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=get_user_info",true);
     xhr.onload = function(){
+		data = JSON.parse(xhr.responseText);
+		window["username"] = data["username"];
+		window["email"] = data["email"];
+		$("#accountName").html(window["email"]);
 		if(xhr.responseText.substring(0, 13) == '{"devices":[]'){
 			outHTML =
 				"<div class='inform'>"+
@@ -164,12 +169,7 @@ function getDevices(){
 				
 			$("#deviceList").html(outHTML);
 		}
-		else{
-			data = JSON.parse(xhr.responseText);
-			window["username"] = data["username"];
-			window["email"] = data["email"];
-			$("#accountName").html(window["email"]);
-			
+		else{			
 			if(xhr.responseText != window["devicesList"]){
 				window["devicesList"] = xhr.responseText;
 				outHTML = "";
@@ -204,6 +204,63 @@ function getDevices(){
 	}
 }
 
+function signup(){
+	var email = document.getElementById("emailNew").value;
+	var password = document.getElementById("passwordNew").value;
+	var password2 = document.getElementById("passwordNew2").value;
+
+    if(email == "")
+    {
+        notify("Please enter your email", "Email Missing", "OK");
+        return;
+    }
+
+    if(password == "")
+    {
+        notify("Please enter a password","Password Missing", "OK"); 
+        return;
+    }
+	
+	if(password2 != password)
+    {
+        notify("Password inputs do not match!","Password Mismatch", "OK"); 
+        return;
+    }
+
+	switchView("#loadingView","Loading",false,false);
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=register_user&email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password),true);
+    xhr.onload = function(){
+        if(xhr.responseText == "TRUE" || xhr.responseText == "ALREADY_LOGGED_IN" || xhr.responseText == "USER_EXISTS"){
+			var xhr2 = new XMLHttpRequest();
+			xhr2.open("GET", "http://moodlighting.co/wp-admin/admin-ajax.php?action=login&email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password),true);
+			xhr2.onload = function(){
+				if(xhr2.responseText == "FALSE"){
+					notify(xhr2.responseText, "Bad Creds", "Try Again");
+					switchView("#signupView","Sign Up",false,false);
+				}
+				else if(xhr2.responseText == "TRUE" || xhr2.responseText == "ALREADY_LOGGED_IN"){
+					localStorage.setItem("email",email);
+					$("#email").val(email);
+					loginSuccess();
+				}
+				else{
+					notify(xhr2.responseText, "Error response (Login):", "Try Again");
+					switchView("#signupView","Sign Up",false,false);
+				}
+			};   
+			xhr2.send();
+		}
+		else{
+			notify(xhr.responseText, "Error response:", "Try Again");
+			switchView("#signupView","Sign Up",false,false);
+		}
+    };   
+    xhr.send();
+	
+	
+}
+
 function login(){
 	var email = document.getElementById("email").value;
 	var password = document.getElementById("password").value;
@@ -229,6 +286,7 @@ function login(){
 			switchView("#loginView","Log In",false,false);
         }
         else if(xhr.responseText == "TRUE" || xhr.responseText == "ALREADY_LOGGED_IN"){
+			localStorage.setItem("email",email);
 			loginSuccess();
 		}
 		else{
@@ -268,7 +326,6 @@ function sendMessage(){
 }
 
 function startApp(){
-	alert("startApp");
 	try{
 		
 	var email = "nothing";
