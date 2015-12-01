@@ -63,6 +63,7 @@
 		</div>
 	
 		<div id="container" class="slideStill">
+		<div id="inner">
 		<div id="mask" onclick="toggleMenu(false)"></div>
 		
 		<div id="loadingView" class="page">
@@ -74,19 +75,23 @@
 		<div id="infoEmotion" class="help">
 			<span style="font-size: 7vw;margin-bottom:0.5em;margin-top:0.5em;display:block;">Welcome to moodLighting!</span>
 			We are an experimental emotional analytics service dedicated to studying the effect of both major and minor world events on human emotion!<br>&nbsp;<br>
-			We study six core emotions:<br>
-			<span style="color:#ff5eb1">Love</span>, 
-			<span style="color:#ffcc00">Joy</span>, 
-			<span style="color:#cc66ff">Surprise</span>, 
-			<span style="color:#b03c3c">Anger</span>, 
-			<span style="color:#1E8BFF">Sadness</span> 
-			and 
-			<span style="color:#00FFC6">Fear</span>.
+			<div style="font-size:1em;float:center;text-align:center;"><em>We study six core emotions:</em><br><br>
+			<div>
+				<span class="emoInfo" style="color:#ff5eb1">Love</span>
+				<span class="emoInfo" style="color:#ffcc00">Joy</span>
+				<span class="emoInfo" style="color:#cc66ff">Surprise</span><br>
+				<span class="emoInfo" style="color:#b03c3c">Anger</span>
+				<span class="emoInfo" style="color:#1E8BFF">Sadness</span> 
+				<span class="emoInfo" style="color:#00FFC6">Fear</span>
+			</div>
+			</div><br>
+			<a href="http://moodlighting.co/frequently-asked-questions/"><button>READ MORE...</button></a>
+			
+			
 		</div> 
 		
 		<div id="infoView" class="page">
 			<div id="infoContent"></div>
-			<button id="infoBack" onclick="switchView('#homeView','Last 6 Hours',true,false,false);">Go Back</button>
 		</div> 
 		
 		<div id="loginView" class="page">
@@ -187,7 +192,7 @@
 		<div id="archiveView" class="page">
 			<div class="sectionTitle">Archive Data</div>
 		</div>
-		
+		</div>
 		</div>
 
 		<script type="text/javascript" src="cordova.js"></script>
