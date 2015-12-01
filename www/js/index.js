@@ -74,10 +74,12 @@ function writeCredits(){
 }
 
 function showInfo(){
+	toggleMenu(false);
 	$("#infoButton").fadeOut("fast");
 	oldView = window["oldView"];
 	$("#infoContent").html($(window["info"]).html());
 	switchView("#infoView","Emotion Info",true,false,true);
+	toggleMenu(false);
 }
 
 function toggleMenu(state){
