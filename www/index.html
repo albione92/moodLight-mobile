@@ -56,7 +56,7 @@
 					<div id="menu-signout" onclick="logout();">Sign out</div>
 				</div>
 				<div class="menu-li" onclick="switchView('#homeView','Last 6 Hours',true,true,false);">Stats</div>
-				<div class="menu-li" onclick="switchView('#controlView','Control',true,true,true);">Control</div>
+				<div class="menu-li" onclick="switchView('#deviceView','Devices',true,true,true);">Devices</div>
 				<div class="menu-li" onclick="showInfo();">About</div>
 				<div class="menu-li" onclick="switchView('#creditsView','Credits',true,true,true);">Credits</div>
 			</div>
@@ -162,10 +162,12 @@
 			
 		</div>
 		
-		<div id="controlView" class="page">
+		<div id="deviceView" class="page">
 			<div class="sectionTitle">moodLight Devices</div>
 			<div id="deviceList"></div>
-			<div class="divider"></div>
+		</div>
+		
+		<div id="controlView" class="page">
 			<div class="sectionTitle">Custom Command</div>
 			<input id="command" type="text" value="101008000255000005000"/>
 			<button onclick="sendMessage();">SEND MESSAGE</button>

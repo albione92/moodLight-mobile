@@ -200,7 +200,9 @@ function getDevices(){
 					mode = entry["mode"];
 					ip = entry["ip"];
 					outHTML += 
-						"<div class='deviceli'>"+
+						"<div class='deviceli' onclick='"+
+							'pickDevice("'+nickname+'","'+ip+'");'+
+						"'>"+
 							"<div class='inner'>"+
 								"<span class='nick'>"+
 									nickname.replace("_", " ")+
@@ -223,6 +225,12 @@ function getDevices(){
     xhr.send();
 	
 	}
+}
+
+function pickDevice(nick,ip){
+	window["control_nick"] = nick;
+	window["control_ip"] = ip;
+	switchView('#controlView','Control',true,true,true);
 }
 
 function signup(){
@@ -337,7 +345,7 @@ function logout(){
 function sendMessage(){
 	try {
 		var command = String(document.getElementById("command").value);
-		udptransmit.initialize("192.168.1.193", 2390);
+		udptransmit.initialize(window["control_ip"], 2390);
 		udptransmit.sendMessage("%"+command+"\n");
 		showAlert("Sent UDP: '%"+command+"\\n'");
 	}
