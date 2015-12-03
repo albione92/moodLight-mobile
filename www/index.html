@@ -168,6 +168,8 @@
 		</div>
 		
 		<div id="controlView" class="page">
+			<div class="backButton" onclick="switchView('#deviceView','Control',true,true,true);">Back to Devices</div>
+			<div id="controlName"></div>
 			<div class="sectionTitle">Custom Command</div>
 			<input id="command" type="text" value="101008000255000005000"/>
 			<button onclick="sendMessage();">SEND MESSAGE</button>

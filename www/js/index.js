@@ -163,7 +163,7 @@ function showAlert(content,color){
 
 function loginSuccess(){
 	window["loggedIn"] = true;
-	switchView("#homeView","Last 6 Hours",true,true,false);
+	switchView("#deviceView","Last 6 Hours",true,true,false);
 	getDevices();
 	setInterval(getDevices,5000);
 	$("#splash").fadeOut("fast");
@@ -230,6 +230,7 @@ function getDevices(){
 function pickDevice(nick,ip){
 	window["control_nick"] = nick;
 	window["control_ip"] = ip;
+	$("#controlName").html(nick);
 	switchView('#controlView','Control',true,true,true);
 }
 
