@@ -163,7 +163,7 @@ function showAlert(content,color){
 
 function loginSuccess(){
 	window["loggedIn"] = true;
-	switchView("#deviceView","Last 6 Hours",true,true,false);
+	switchView("#homeView","Last 6 Hours",true,true,false);
 	getDevices();
 	setInterval(getDevices,5000);
 	$("#splash").fadeOut("fast");

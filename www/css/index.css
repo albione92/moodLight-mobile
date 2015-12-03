@@ -483,6 +483,14 @@ input{
 	font-size: 1em;
 }
 
+.controlTitle{
+background-color: #181818;
+margin-top: -1.3em;
+padding-top: 1em;
+padding-bottom: 0.5em;
+height:4em;
+}
+
 .page,.help{
 	display:none;
 }
@@ -525,6 +533,7 @@ h1{
 }
 
 .backButton{
+margin-top: 1.15em;
 margin-right: 0.5em;
 font-size: 1.0em;
 background-color: #484848;
@@ -540,8 +549,8 @@ background-color: #363636;
 
 #controlName{
 margin-left: 0.5em;
-margin-top: 0.5em;
-font-size: 2em;
+margin-top: 0.8em;
+font-size: 1.75em;
 }
 
 

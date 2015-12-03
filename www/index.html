@@ -163,13 +163,15 @@
 		</div>
 		
 		<div id="deviceView" class="page">
-			<div class="sectionTitle">moodLight Devices</div>
+			<div class="sectionTitle" style="font-size:7vw;text-align:center;">moodLight Devices</div>
 			<div id="deviceList"></div>
 		</div>
 		
 		<div id="controlView" class="page">
-			<div class="backButton" onclick="switchView('#deviceView','Control',true,true,true);">Back to Devices</div>
-			<div id="controlName"></div>
+			<div class="controlTitle">
+				<div class="backButton" onclick="switchView('#deviceView','Control',true,true,true);">Back to Devices</div>
+				<div id="controlName"></div>
+			</div>
 			<div class="sectionTitle">Custom Command</div>
 			<input id="command" type="text" value="101008000255000005000"/>
 			<button onclick="sendMessage();">SEND MESSAGE</button>
